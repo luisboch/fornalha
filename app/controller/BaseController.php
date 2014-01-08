@@ -1,6 +1,6 @@
 <?php
 
-require_once SERVICE_DIR.'SessionManager.php';
+require_once SERVICE_DIR . 'SessionManager.php';
 
 /**
  * Description of BaseController
@@ -20,7 +20,13 @@ class BaseController extends \Phalcon\Mvc\Controller {
         $this->session = SessionManager::getInstance();
 
         $this->view->title = 'Pizzaria Fornalha Vinhedo';
+    }
 
+    protected function showError($ex) {
+        $this->dispatcher->setParams(array('exception' => $ex));
+        $this->dispatcher->forward(array(
+            'controller' => 'error',
+            'action' => 'exception'));
     }
 
 }

@@ -1,9 +1,11 @@
 <?
 
 // Start some constants
+define("ROOT_DIR", realpath(__DIR__ . '/../') . '/');
 define("APP_DIR", realpath(__DIR__ . '/../app') . '/');
 define("CONTROLLER_DIR", APP_DIR . 'controller/');
 define("SERVICE_DIR", APP_DIR . 'service/');
+define("LIB_DIR", APP_DIR . 'lib/');
 
 
 try {
@@ -51,7 +53,18 @@ try {
 
         return $view;
     });
-
+    
+    //Register the flash service with custom CSS classes
+    $di->set('flashSession', function() {
+        $flash = new \Phalcon\Flash\Session(array(
+            'error' => 'alert alert-error',
+            'success' => 'alert alert-success',
+            'notice' => 'alert alert-info',
+            'warning' => 'alert alert-warning'
+        ));
+        return $flash;
+    });
+    
     // Get class/action not found error    
     $di->set('dispatcher', function() use ($di) {
         $evManager = $di->getShared('eventsManager');

@@ -14,4 +14,10 @@ class ErrorController extends BaseController{
     public function show404Action() {
         $this->response->setStatusCode(404, "Not Found");
     }
+    
+    public function exceptionAction() {
+        $this->view->exception = $this->dispatcher->getParam('exception');
+        $this->view->trace = $this->view->exception->getTraceAsString();
+        $this->view->message = $this->view->exception->getMessage();
+    }
 }
