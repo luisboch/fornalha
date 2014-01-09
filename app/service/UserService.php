@@ -3,6 +3,7 @@
 require_once APP_DIR . 'model/UserDAO.php';
 require_once 'BasicService.php';
 require_once 'exceptions/ValidationException.php';
+require_once 'utils/validation/StringValidation.php';
 
 /**
  * Description of UserService
@@ -12,12 +13,12 @@ require_once 'exceptions/ValidationException.php';
  * 
  * @property UserDAO $dao 
  */
-class UserService extends BasicService{
+class UserService extends BasicService {
 
     public function __construct() {
         parent::__construct(new UserDAO());
     }
-    
+
     /**
      * 
      * @param User $user
@@ -30,14 +31,25 @@ class UserService extends BasicService{
         if ($user->getId() == null && !$save) {
             throw new InvalidArgumentException("The object need an id to update");
         } else {
+            
             // Check cpf
-            if ($user->getCpf() == '') {
+            if ($user->getCpf() == '' || !StringValidation::checkCpf($user->getCpf())) {
                 $v->addError("Por favor insira um CPF válido", 'cpf');
+            } else {
+                $userCPF = $this->dao->findByCPF($user->getCpf());
+                if ($userCPF != null && $user->getId() != $userCPF->getId()) {
+                    $v->addError("O CPF inserido já está sendo utilizado, insira um válido");
+                }
             }
 
             // Check email
-            if ($user->getEmail() == '') {
+            if ($user->getEmail() == '' || !StringValidation::checkEmail($user->getEmail())) {
                 $v->addError("Por favor insira um email válido", 'email');
+            } else {
+                $userEmail = $this->dao->findByEmail($user->getEmail());
+                if ($userEmail != null && $user->getId() != $userEmail->getId()) {
+                    $v->addError("O email inserido já está sendo utilizado, insira um válido");
+                }
             }
 
             // Check name

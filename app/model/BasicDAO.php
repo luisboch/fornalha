@@ -14,10 +14,12 @@ class BasicDAO {
      * @var Doctrine\ORM\EntityManager
      */
     protected $em;
+    protected $className;
 
-    function __construct() {
+    function __construct($className) {
         $this->setupDoctrine();
         $this->openDatabaseConnection();
+        $this->className = $className;
     }
 
     private final function openDatabaseConnection() {
@@ -25,9 +27,9 @@ class BasicDAO {
     }
 
     public function setupDoctrine() {
-        
+
         $paths = array(APP_DIR . "entity/");
-        
+
         // the connection configuration
         $dbParams = array(
             'driver' => 'pdo_pgsql',
@@ -37,22 +39,49 @@ class BasicDAO {
             'port' => 5432,
             'host' => 'localhost'
         );
-        
+
         $config = Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, true);
         $this->em = Doctrine\ORM\EntityManager::create($dbParams, $config);
     }
-    
+
     public function save($obj) {
         $this->em->persist($obj);
     }
-    
-    public function update($obj){
+
+    public function update($obj) {
         $this->em->merge($obj);
     }
-    
+
     public function getEntityManager() {
         return $this->em;
     }
 
+    protected final function find($params = array()) {
+        
+        $dql = "select x \nfrom " . $this->className . " x\n";
+
+        if (count($params) > 0) {
+
+            $dql.="where";
+            $i = 0;
+            foreach ($params as $k => $v) {
+
+                if ($i != 0) {
+                    $dql.="and";
+                }
+                
+                if(is_string($v)){
+                    $v = "'$v'";
+                }
+                
+                $dql .= " x." . $k . " " . $v . "\n";
+                $i++;
+            }
+        }
+
+        $query = $this->em->createQuery($dql);
+        
+        return $query->getResult();
+    }
 
 }
