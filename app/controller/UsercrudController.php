@@ -53,6 +53,9 @@ class UsercrudController extends CrudBase {
             if ($passwd1 !== $passwd2) {
                 $this->error('As duas senhas devem ser iguais');
                 return FALSE;
+            } else if(strlen ($passwd1) < 6){
+                $this->error('A senha deve possuir no mínimo 6 caracteres');
+                return FALSE;
             }
         }
         return TRUE;

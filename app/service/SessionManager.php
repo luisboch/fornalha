@@ -1,20 +1,24 @@
 
 <?php
+
 require 'utils/MessageSession.php';
+require APP_DIR . 'entity/User.php';
+
 /**
  * Description of SessionManager
  *
  * @author luis
  */
 class SessionManager {
-    
+
     private $user = null;
+
     /**
      *
      * @var SessionManager
      */
     private static $instance;
-    
+
     /**
      * @var MessageSession
      */
@@ -27,7 +31,7 @@ class SessionManager {
     public function getMessage() {
         return $this->message;
     }
-    
+
     /**
      *
      * @return SessionManager
@@ -35,7 +39,7 @@ class SessionManager {
     public static function getInstance() {
 
         if (self::$instance === null) {
-            
+
             session_start();
 
             if (!isset($_SESSION['_SS']) || $_SESSION['_SS'] == '') {
@@ -70,11 +74,11 @@ class SessionManager {
     public function setShowChat($showChat) {
         $this->showChat = $showChat;
     }
-    
-    public function isLogged(){
+
+    public function isLogged() {
         return $this->user !== null;
     }
-    
+
     public function getUser() {
         return $this->user;
     }

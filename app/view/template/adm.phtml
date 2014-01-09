@@ -89,11 +89,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                            Luis Carlos
+                            {{_session.getUser().getName()}}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="index.php">Sair</a></li>
+                            <li><a href="{{url('security/logout')}}">Sair</a></li>
                         </ul>
                     </li>
                 </ul>

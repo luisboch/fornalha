@@ -63,7 +63,7 @@ abstract class CrudBase extends AdminBase {
     }
 
     private function resolveInstance($id) {
-        if ($id != '') {
+        if ($id != '' && !is_object($id)) {
             $this->instance = $this->service->findById($id);
         } else {
             $params = $this->dispatcher->getParams();
