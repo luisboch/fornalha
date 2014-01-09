@@ -40,10 +40,11 @@
 <div class="container">
 
     <form class="form-signin" action="{{ url('security/login')}}" role="form" method="post">
+        <p>{{_session.getMessage()}}</p>
         <input type="hidden" name="targetUrl" value="{{ targetUrl }}"/>
         <p >Por favor, efetue o login para continuar</p>
-        <input type="text" class="form-control" placeholder="Email" required autofocus>
-        <input type="password" class="form-control" placeholder="senha" required>
+        <input type="email" class="form-control" name="email" placeholder="Email" required autofocus>
+        <input type="password" name="password" class="form-control" placeholder="senha" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
     </form>
 

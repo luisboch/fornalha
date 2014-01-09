@@ -67,5 +67,22 @@ class UserService extends BasicService {
             }
         }
     }
-
+    
+    /**
+     * 
+     * @param string $email
+     * @return User
+     */
+    public function findByEmail($email) {
+        return $this->dao->findByEmail($email);
+    }
+    
+    /**
+     * 
+     * @param string $cpf
+     * @return User
+     */
+    public function findByCPF($cpf) {
+        return $this->dao->findByCPF($cpf);
+    }
 }
