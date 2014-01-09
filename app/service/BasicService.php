@@ -50,4 +50,7 @@ abstract class BasicService {
     public function findById($id) {
         return $this->dao->findById($id);
     }
+
+    public abstract function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL);
+    public abstract function searchCount($filters = array(), $activeOnly = NULL);
 }

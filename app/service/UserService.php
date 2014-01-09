@@ -31,7 +31,7 @@ class UserService extends BasicService {
         if ($user->getId() == null && !$save) {
             throw new InvalidArgumentException("The object need an id to update");
         } else {
-            
+
             // Check cpf
             if ($user->getCpf() == '' || !StringValidation::checkCpf($user->getCpf())) {
                 $v->addError("Por favor insira um CPF válido", 'cpf');
@@ -67,7 +67,7 @@ class UserService extends BasicService {
             }
         }
     }
-    
+
     /**
      * 
      * @param string $email
@@ -76,7 +76,7 @@ class UserService extends BasicService {
     public function findByEmail($email) {
         return $this->dao->findByEmail($email);
     }
-    
+
     /**
      * 
      * @param string $cpf
@@ -85,4 +85,77 @@ class UserService extends BasicService {
     public function findByCPF($cpf) {
         return $this->dao->findByCPF($cpf);
     }
+
+    /**
+     * 
+     * @param array $filter
+     * Can user to search for all properties
+     * 
+     * example:
+     * [
+     *      "name" => "My Name",
+     *      "email" => "myemail.com"
+     * ]
+     * 
+     * will generate filter like:
+     *  where lower(name) like lower('%My%Name%') 
+     *    and lower(email) like lower('%myemail.com%')
+     * 
+     * another way is use the generic term "search"
+     * example: 
+     * 
+     * [
+     *      "search" => "MySearch"
+     * ]
+     * 
+     * will generate filter like:
+     *  where lower(name) like lower('%MySearch%') 
+     *    and lower(email) like lower('%MySearch%')
+     *
+     * Note: Do not use both option a the same time.
+     * 
+     * @param boolean $activeOnly
+     * @param int $limit
+     * @param int $offset
+     * @return User[]
+     */
+    public function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL) {
+        return $this->dao->search($filters, $activeOnly, $limit, $offset);
+    }
+    
+    /**
+     * @param array $filters
+     * Can user to search for all properties
+     * 
+     * example:
+     * [
+     *      "name" => "My Name",
+     *      "email" => "myemail.com"
+     * ]
+     * 
+     * will generate filter like:
+     *  where lower(name) like lower('%My%Name%') 
+     *    and lower(email) like lower('%myemail.com%')
+     * 
+     * another way is use the generic term "search"
+     * example: 
+     * 
+     * [
+     *      "search" => "MySearch"
+     * ]
+     * 
+     * will generate filter like:
+     *  where lower(name) like lower('%MySearch%') 
+     *    and lower(email) like lower('%MySearch%')
+     *
+     * Note: Do not use both option a the same time.
+     * 
+     * 
+     * @param boolean $activeOnly
+     * @return int
+     */
+    public function searchCount($filters = array(), $activeOnly = NULL) {
+        return $this->dao->searchCount($filters, $activeOnly);
+    }
+
 }

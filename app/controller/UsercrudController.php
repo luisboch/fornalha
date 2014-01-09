@@ -16,10 +16,9 @@ class UsercrudController extends CrudBase {
         parent::initialize(new UserService());
 
         $this->action = "Usuários";
-    }
-
-    public function indexAction() {
         
+        // Set default active of value
+        $this->view->active = true;
     }
 
     /**
@@ -53,7 +52,7 @@ class UsercrudController extends CrudBase {
             if ($passwd1 !== $passwd2) {
                 $this->error('As duas senhas devem ser iguais');
                 return FALSE;
-            } else if(strlen ($passwd1) < 6){
+            } else if (strlen($passwd1) < 6) {
                 $this->error('A senha deve possuir no mínimo 6 caracteres');
                 return FALSE;
             }
@@ -62,7 +61,20 @@ class UsercrudController extends CrudBase {
     }
 
     protected function createNewInstance() {
-        return new User();
+        $user = new User();
+        $user->setCreationDate(new DateTime());
+        return $user;
+    }
+
+    protected function getSearchParams() {
+        return array('search' => $this->request->getQuery('search'));
+    }
+
+    protected function beforeSearch() {
+        $active = $this->request->getQuery('active');
+        $this->showActiveResults = $active === 'on';
+        $this->view->active = $this->showActiveResults;
+        return true;
     }
 
 }

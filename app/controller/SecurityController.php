@@ -1,6 +1,6 @@
 <?php
 
-require_once 'BaseController.php';
+require_once 'ControllerBase.php';
 require_once APP_DIR . 'service/UserService.php';
 
 class SecurityController extends ControllerBase {
@@ -30,6 +30,8 @@ class SecurityController extends ControllerBase {
 
                 if ($user != null && $this->security->checkHash($passwd, $user->getPassword())) {
                     $this->session->setUser($user);
+                    $user->setLastAccess(new DateTime());
+                    $this->service->update($user);
                     $this->response->redirect('admin');
                 } else {
                     $this->error("Email/Senha inválido(s)");

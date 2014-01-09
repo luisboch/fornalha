@@ -7,6 +7,11 @@ define("CONTROLLER_DIR", APP_DIR . 'controller/');
 define("SERVICE_DIR", APP_DIR . 'service/');
 define("LIB_DIR", APP_DIR . 'lib/');
 
+// Used for pagination
+define("DEFAULT_LIMITS_PER_PAGE", 20);
+
+// set default timezone
+date_default_timezone_set('America/Sao_Paulo');
 
 try {
     // Register an autoloader
@@ -43,6 +48,10 @@ try {
                 'compileAlways' => true
             ));
 
+            $compiler = $volt->getCompiler();
+            
+            $compiler->addFunction('formatDate', 'formatDate');
+            
             return $volt;
         };
 
@@ -53,7 +62,7 @@ try {
 
         return $view;
     });
-    
+
     //Register the flash service with custom CSS classes
     $di->set('flashSession', function() {
         $flash = new \Phalcon\Flash\Session(array(
@@ -64,7 +73,7 @@ try {
         ));
         return $flash;
     });
-    
+
     // Get class/action not found error    
     $di->set('dispatcher', function() use ($di) {
         $evManager = $di->getShared('eventsManager');

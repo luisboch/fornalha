@@ -1,5 +1,5 @@
 <?php
-require_once 'BaseController.php';
+require_once 'ControllerBase.php';
 
 /**
  * Description of AdminBase

@@ -24,6 +24,26 @@ class User {
     /** @Column(type="string") * */
     private $password;
 
+    /**
+     * @var boolean
+     * @Column(type="boolean")
+     */
+    private $active = true;
+
+    /**
+     *
+     * @var type 
+     * @Column(type="datetime", name="creation_date")
+     */
+    private $creationDate;
+    
+    /**
+     *
+     * @var type 
+     * @Column(type="datetime", name="last_access")
+     */
+    private $lastAccess;
+    
     public function getId() {
         return $this->id;
     }
@@ -63,5 +83,30 @@ class User {
     public function setPassword($password) {
         $this->password = $password;
     }
+
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function setActive($active) {
+        $this->active = $active;
+    }
+    
+    public function getCreationDate() {
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(DateTime $creationDate) {
+        $this->creationDate = $creationDate;
+    }
+    
+    public function getLastAccess() {
+        return $this->lastAccess;
+    }
+
+    public function setLastAccess(DateTime $lastAccess) {
+        $this->lastAccess = $lastAccess;
+    }
+
 
 }

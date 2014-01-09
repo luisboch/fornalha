@@ -6089,7 +6089,7 @@ a.list-group-item.active:focus .list-group-item-text {
 
 .panel-footer {
   padding: 10px 15px;
-  background-color: #18cbd8;
+  background-color: #007752;
   border-top: 1px solid #006742;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -6127,7 +6127,7 @@ a.list-group-item.active:focus .list-group-item-text {
 
 .panel-default > .panel-heading {
   color: #ffffff;
-  background-color: #18cbd8;
+  background-color: #007752;
   border-color: #006742;
 }
 

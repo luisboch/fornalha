@@ -2,6 +2,9 @@
 
 require_once SERVICE_DIR . 'SessionManager.php';
 
+// Include helpers
+require_once APP_DIR . 'components/volt/helpers.php';
+
 /**
  * Description of BaseController
  *
