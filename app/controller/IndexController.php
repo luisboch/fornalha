@@ -11,7 +11,7 @@ require_once 'BaseController.php';
  *
  * @author luis
  */
-class IndexController extends BaseController {
+class IndexController extends ControllerBase {
 
     public function indexAction() {
         $this->view->action = 'Home';

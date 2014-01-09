@@ -2,7 +2,7 @@
 
 require_once 'BaseController.php';
 
-class SecurityController extends BaseController {
+class SecurityController extends ControllerBase {
 
     public function initialize() {
         parent::initialize();

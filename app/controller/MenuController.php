@@ -7,7 +7,7 @@ require_once 'BaseController.php';
  *
  * @author luis
  */
-class MenuController extends BaseController {
+class MenuController extends ControllerBase {
 
     public function initialize() {
         parent::initialize();

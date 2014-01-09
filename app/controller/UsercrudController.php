@@ -1,85 +1,65 @@
 <?php
 
-require_once 'AdminBase.php';
+require_once 'CrudBase.php';
 require_once APP_DIR . 'service/UserService.php';
 
 /**
  * Description of UserCrudController
  *
  * @author luis
+ * @property UserService $service 
  */
-class UsercrudController extends AdminBase {
-
-    /**
-     *
-     * @var UserService
-     */
-    private $service;
+class UsercrudController extends CrudBase {
 
     public function initialize() {
 
-        parent::initialize();
+        parent::initialize(new UserService());
 
         $this->action = "Usuários";
-
-        $this->service = new UserService();
     }
 
     public function indexAction() {
         
     }
 
-    public function editAction($id = null) {
-        if ($id == null) {
-            $user = new User();
-        } else {
-            $user = $this->service->findById($id);
-            if ($user === null) {
-                $this->dispatcher->forward(array('controller' => 'error', 'action' => 'show404'));
-                return;
-            } else if($this->request->getQuery('saved') == 'true'){
-                $this->flashSession->success('Usuário salvo com sucesso');
-            }
+    /**
+     * 
+     * @param User $user
+     */
+    protected function populatePostData($user) {
+
+        $user->setName($this->request->getPost("name"));
+        $user->setEmail($this->request->getPost("email"));
+        $user->setCpf($this->request->getPost("cpf"));
+
+        $user->setId($this->request->getPost("id"));
+
+        if ($user->getId() == null || $this->request->getPost("passwd1") != '') {
+            $user->setPassword($this->security->hash($this->request->getPost("passwd1")));
         }
-
-        if ($this->request->isPost()) {
-
-            $user->setName($this->request->getPost("name"));
-            $user->setEmail($this->request->getPost("email"));
-            $user->setCpf($this->request->getPost("cpf"));
-            $user->setPassword($this->request->getPost("passwd1"));
-            $user->setId($this->request->getPost("id"));
-            
-            if ($this->request->getPost("passwd1") !== $this->request->getPost("passwd2")) {
-                $this->flashSession->error('As duas senhas devem ser iguais');
-            } else {
-                $this->saveOrUpdate($user);
-            }
-        }
-
-        $this->view->user = $user;
     }
 
-    private function saveOrUpdate($user) {
+    /**
+     * 
+     * @param User $user
+     */
+    protected function isValid($user) {
 
-        $this->view->user = $user;
+        $passwd1 = $this->request->getPost("passwd1");
 
-        try {
-            if ($user->getId() == '') {
-                $this->service->save($user);
-                $this->response->redirect('usercrud/edit/' . $user->getId().'?saved=true');
-                return false;
-            } else {
-                $this->service->update($user);
-                $this->flashSession->success('Usuário atualizado com sucesso');
+        $passwd2 = $this->request->getPost("passwd2");
+
+        if ($user->getId() == null || $passwd1 != '') {
+            if ($passwd1 !== $passwd2) {
+                $this->error('As duas senhas devem ser iguais');
+                return FALSE;
             }
-        } catch (ValidationException $ex) {
-            foreach ($ex->getErrors() as $err) {
-                $this->flashSession->error($err->getMessage());
-            }
-        } catch (Exception $ex) {
-            $this->showError($ex);
         }
+        return TRUE;
+    }
+
+    protected function createNewInstance() {
+        return new User();
     }
 
 }

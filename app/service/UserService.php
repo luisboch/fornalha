@@ -1,6 +1,7 @@
 <?php
 
 require_once APP_DIR . 'model/UserDAO.php';
+require_once 'BasicService.php';
 require_once 'exceptions/ValidationException.php';
 
 /**
@@ -8,45 +9,15 @@ require_once 'exceptions/ValidationException.php';
  *
  * @author luis
  * @since Jan 7, 2014
+ * 
+ * @property UserDAO $dao 
  */
-class UserService {
+class UserService extends BasicService{
 
-    /**
-     * @var UserDAO
-     */
-    protected $dao;
-
-    function __construct() {
-        $this->dao = new UserDAO();
+    public function __construct() {
+        parent::__construct(new UserDAO());
     }
-
-    function save($user) {
-        $this->validate($user);
-        try {
-            // Begin Transaction
-            $this->dao->save($user);
-            $this->dao->getEntityManager()->flush();
-        } catch (Exception $ex) {
-            throw $ex;
-        }
-    }
-
-    /**
-     * 
-     * @param User $user
-     * @throws Exception
-     */
-    function update($user) {
-        $this->validate($user, false);
-        try {
-            // Begin Transaction
-            $this->dao->update($user);
-            $this->dao->getEntityManager()->flush();
-        } catch (Exception $ex) {
-            throw $ex;
-        }
-    }
-
+    
     /**
      * 
      * @param User $user
@@ -83,10 +54,6 @@ class UserService {
                 throw $v;
             }
         }
-    }
-    
-    public function findById($id) {
-        return $this->dao->findById($id);
     }
 
 }

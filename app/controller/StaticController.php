@@ -7,7 +7,7 @@ require_once 'BaseController.php';
  *
  * @author luis
  */
-class StaticController extends BaseController {
+class StaticController extends ControllerBase {
 
     public function indexAction() {
         $this->dispatcher->forward(array(

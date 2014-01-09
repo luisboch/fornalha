@@ -1,6 +1,6 @@
 
 <?php
-
+require 'utils/MessageSession.php';
 /**
  * Description of SessionManager
  *
@@ -14,11 +14,20 @@ class SessionManager {
      * @var SessionManager
      */
     private static $instance;
+    
+    /**
+     * @var MessageSession
+     */
+    private $message;
 
     private function __construct() {
-        
+        $this->message = new MessageSession();
     }
 
+    public function getMessage() {
+        return $this->message;
+    }
+    
     /**
      *
      * @return SessionManager

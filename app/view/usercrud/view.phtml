@@ -6,35 +6,35 @@
             <div class="bs-sidebar hidden-print"  data-spy="affix" data-offset-bottom="180" role="complementary">
                 <ul class="nav bs-sidenav">
                     <li>
-                        <a href="{{ url('usercrud/edit') }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Novo</a>
+                        <a href="{{ url('usercrud/view') }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Novo</a>
                         <a href="{{ url('usercrud') }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Pesquisar</a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="col-md-9" role="main">
-            <p><?php $this->flashSession->output() ?></ p>
-            <form action="{{ url('usercrud/edit/'~user.getId()) }}" method="post">
-                <input type="hidden" name="id" value="{{user.getId()}}">
+            <p>{{ _session.getMessage() }}</ p>
+            <form action="{{ url('usercrud/save/') }}" method="post">
+                <input type="hidden" name="id" value="{{instance.getId()}}">
                 <div class="form-group">
                     <label for="name" >Nome</label>
-                    <input type="text" class="form-control" name="name" required placeholder="Meu Nome" value="{{user.getName()}}"/>
+                    <input type="text" class="form-control" name="name" required placeholder="Meu Nome" value="{{instance.getName()}}"/>
                 </div>
                 <div class="form-group">
                     <label for="email" >Email</label>
-                    <input type="email" class="form-control" name="email" required placeholder="email@exemplo.com"  value="{{user.getEmail()}}"/>
+                    <input type="email" class="form-control" name="email" required placeholder="email@exemplo.com"  value="{{instance.getEmail()}}"/>
                 </div>
                 <div class="form-group">
                     <label for="cpf" >CPF</label>
-                    <input type="text" class="form-control" name="cpf" required placeholder="00000000000" value="{{user.getCpf()}}"/>
+                    <input type="text" class="form-control" name="cpf" required placeholder="00000000000" value="{{instance.getCpf()}}"/>
                 </div>
                 <div class="form-group">
                     <label for="passwd1" >Senha (6 caracteres)</label>
-                    <input type="password" class="form-control" required name="passwd1" placeholder="*******" />
+                    <input type="password" class="form-control" {{ instance.getId() is empty ? "required":"" }} name="passwd1" />
                 </div>
                 <div class="form-group">
                     <label for="passwd2" >Confirme a senha</label>
-                    <input  type="password" class="form-control" required name="passwd2" placeholder="*******"/>
+                    <input  type="password" class="form-control" {{ instance.getId() is empty ? "required":"" }} name="passwd2" />
                 </div>
 
                 <div class="form-group text-right" >

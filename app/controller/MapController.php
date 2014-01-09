@@ -6,7 +6,7 @@ require_once 'BaseController.php';
  *
  * @author luis
  */
-class MapController extends BaseController {
+class MapController extends ControllerBase {
     public function initialize() {
         parent::initialize();
         $this->view->action = "Mapa";

@@ -11,7 +11,7 @@ require_once 'BaseController.php';
  *
  * @author luis
  */
-class DealsController extends BaseController{
+class DealsController extends ControllerBase{
     
     public function initialize() {
         parent::initialize();

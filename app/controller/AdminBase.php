@@ -6,7 +6,7 @@ require_once 'BaseController.php';
  *
  * @author luis
  */
-class AdminBase extends BaseController{
+class AdminBase extends ControllerBase{
     
     public function initialize() {
         

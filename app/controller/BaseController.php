@@ -7,12 +7,13 @@ require_once SERVICE_DIR . 'SessionManager.php';
  *
  * @author luis
  */
-class BaseController extends \Phalcon\Mvc\Controller {
+class ControllerBase extends \Phalcon\Mvc\Controller {
 
     /**
      * @var SessionManager
      */
     protected $session;
+    
 
     public function initialize() {
 
@@ -20,6 +21,8 @@ class BaseController extends \Phalcon\Mvc\Controller {
         $this->session = SessionManager::getInstance();
 
         $this->view->title = 'Pizzaria Fornalha Vinhedo';
+        
+        $this->view->_session = $this->session;
     }
 
     protected function showError($ex) {
@@ -27,6 +30,22 @@ class BaseController extends \Phalcon\Mvc\Controller {
         $this->dispatcher->forward(array(
             'controller' => 'error',
             'action' => 'exception'));
+    }
+    
+    protected function info($message){
+        $this->session->getMessage()->info($message);
+    }
+    
+    protected function warn($message){
+        $this->session->getMessage()->warn($message);
+    }
+    
+    protected function success($message){
+        $this->session->getMessage()->success($message);
+    }
+    
+    protected function error($message){
+        $this->session->getMessage()->error($message);
     }
 
 }

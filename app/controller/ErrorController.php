@@ -6,7 +6,7 @@ require_once 'BaseController.php';
  *
  * @author luis
  */
-class ErrorController extends BaseController{
+class ErrorController extends ControllerBase{
     public function initialize() {
         parent::initialize();
         $this->view->action = "404";
