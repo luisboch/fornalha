@@ -18,7 +18,11 @@ class AdminBase extends ControllerBase{
                 'controller' => 'security',
                 'action' => 'login'
             ));
+        } else {
+            $this->view->setViewsDir('../app/view/admin/');
         }
+        
+        
     }
     
 }

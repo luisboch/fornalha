@@ -198,7 +198,7 @@ abstract class CrudBase extends AdminBase {
     private function getNewInstance() {
         $instance = $this->createNewInstance();
         if ($instance == null) {
-            throw new LogicException(" Method #createNewInstance must return a new instance of currente managed class");
+            throw new LogicException("Method #createNewInstance must return a new instance of currente managed class");
         }
         return $instance;
     }
