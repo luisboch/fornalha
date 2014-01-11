@@ -56,7 +56,7 @@ class BasicDAO {
         return $this->em;
     }
 
-    protected final function find($params = array()) {
+    protected final function find($params = array(), $order = "id") {
 
         $dql = "select x \nfrom " . $this->className . " x\n";
 
@@ -64,20 +64,24 @@ class BasicDAO {
 
         if (count($params) > 0) {
 
-            $dql.="where";
+            $dql.="where ";
             $i = 0;
             foreach ($params as $k => $v) {
 
                 if ($i != 0) {
-                    $dql.="and";
+                    $dql.="and ";
                 }
 
-                $dql .= " x." . $k . " ?" . ($i + 1) . "\n";
+                $dql .= "x." . $k . " ?" . ($i + 1) . "\n";
 
                 $queryParms[$i + 1] = $v;
 
                 $i++;
             }
+        }
+        
+        if($order != ""){
+            $dql .= "order by x.".$order."\n ";
         }
 
         $query = $this->em->createQuery($dql);

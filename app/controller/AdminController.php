@@ -7,11 +7,11 @@ require_once 'AdminBase.php';
  * @since Jan 9, 2014
  */
 class AdminController extends AdminBase{
+    
     public function initialize() {
         parent::initialize();
     }
     
     public function indexAction() {
-        
     }
 }
