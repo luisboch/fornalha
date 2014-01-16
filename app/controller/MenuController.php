@@ -1,13 +1,13 @@
 <?php
 
-require_once 'ControllerBase.php';
+require_once 'OpenBase.php';
 
 /**
  * Description of MenuController
  *
  * @author luis
  */
-class MenuController extends ControllerBase {
+class MenuController extends OpenBase {
 
     public function initialize() {
         parent::initialize();

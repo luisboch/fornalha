@@ -1,13 +1,13 @@
 <?php
 
-require_once 'ControllerBase.php';
+require_once 'OpenBase.php';
 
 /**
  * Description of ErrorController
  *
  * @author luis
  */
-class ErrorController extends ControllerBase {
+class ErrorController extends OpenBase {
 
     public function initialize() {
         parent::initialize();

@@ -114,6 +114,8 @@ class ConfigController extends AdminBase {
         $instance->getAddress()->setNumber($this->request->getPost('number'));
         $instance->getAddress()->setObservation($this->request->getPost('observation'));
         $instance->getAddress()->setStreet($this->request->getPost('street'));
+        $instance->getAddress()->setStreetCode($this->request->getPost('street_code'));
+        $instance->getAddress()->setNeighborhood($this->request->getPost('neighborhood'));
     }
 
     /**

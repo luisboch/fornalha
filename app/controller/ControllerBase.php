@@ -9,7 +9,6 @@ require_once APP_DIR . 'components/volt/helpers.php';
 
 /**
  * Description of BaseController
- *
  * @author luis
  */
 class ControllerBase extends \Phalcon\Mvc\Controller {

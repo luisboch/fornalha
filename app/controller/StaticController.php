@@ -1,5 +1,5 @@
 <?php
-require_once 'ControllerBase.php';
+require_once 'OpenBase.php';
 
 
 /**
@@ -7,7 +7,7 @@ require_once 'ControllerBase.php';
  *
  * @author luis
  */
-class StaticController extends ControllerBase {
+class StaticController extends OpenBase {
 
     public function indexAction() {
         $this->dispatcher->forward(array(

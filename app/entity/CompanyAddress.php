@@ -1,5 +1,6 @@
 <?php
-
+require_once 'State.php';
+require_once 'City.php';
 /**
  * Description of CompanyAddress
  *
@@ -40,6 +41,18 @@ class CompanyAddress {
      *  @var City
      */
     private $city;
+    
+    /**
+     *
+     * @Column(type="string", name="street_code")
+     */
+    private $streetCode;
+    
+    /**
+     * @Column(type="string", name="neighborhood")
+     * @var string
+     */
+    private $neighborhood;
     
     public function getId() {
         return $this->id;
@@ -102,4 +115,21 @@ class CompanyAddress {
     public function setCity($city) {
         $this->city = $city;
     }
+    
+    public function getStreetCode() {
+        return $this->streetCode;
+    }
+
+    public function setStreetCode($streetCode) {
+        $this->streetCode = $streetCode;
+    }
+    
+    public function getNeighborhood() {
+        return $this->neighborhood;
+    }
+
+    public function setNeighborhood($neighborhood) {
+        $this->neighborhood = $neighborhood;
+    }
+    
 }

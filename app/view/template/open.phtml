@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>{{ title }} | {{ action }}</title>
+        <title>{{ _company.getName() }} | {{ title }}</title>
 
         <!-- Bootstrap core CSS -->
         <!-- Custom styles for this template -->
@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('') }}">Fornalha Vinhedo</a>
+                <a class="navbar-brand" href="{{ url('') }}">{{ _company.getName() }}</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -73,9 +73,9 @@
                     <img class="img-rounded" src="{{ url("img/layout/logo.gif") }}" alt="Generic placeholder image">
                 </div>
                 <div class="col-lg-4">
-                    <p class="">Tv Santa Cruz, 1404 - final da indepedência - Pinheirinho</p>
-                    <p class="">Vinhedo, SP | CEP: 13280-000</p>
-                    <p class="">(19) 3876-2588</p>
+                    <p class="">{{ _company.getAddress().getStreet() }}, {{ _company.getAddress().getNumber() }} - {{ _company.getAddress().getObservation() }} - {{ _company.getAddress().getNeighborhood() }}</p>
+                    <p class="">{{ _company.getAddress().getCity().getName() }}, {{ _company.getAddress().getState().getCode() }} | CEP: {{ _company.getAddress().getStreetCode() }}</p>
+                    <p class="">{{ _company.getContact().getPhonesAsString() }}</p>
                 </div> 
                 <div class="col-lg-4 text-right">
                     <a href="#">Topo</a> <br />

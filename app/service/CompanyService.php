@@ -37,6 +37,14 @@ class CompanyService extends BasicService {
         if ($entity->getAddress()->getNumber() == '') {
             $v->addError("Insira o numero do endereço", 'number');
         }
+        
+        if ($entity->getAddress()->getNeighborhood() == '') {
+            $v->addError("Preencha o bairro", 'neighborhood');
+        }
+        
+        if ($entity->getAddress()->getStreetCode() == '') {
+            $v->addError("Preencha o cep", 'streetCode');
+        }
 
         if ($entity->getAddress()->getState() == null) {
             $v->addError("Selecione o estado", 'state');

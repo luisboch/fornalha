@@ -1,9 +1,9 @@
 <?php
 
-require_once 'ControllerBase.php';
+require_once 'OpenBase.php';
 require_once APP_DIR . 'service/UserService.php';
 
-class SecurityController extends ControllerBase {
+class SecurityController extends OpenBase {
 
     /**
      *

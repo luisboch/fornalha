@@ -63,7 +63,7 @@ class CompanyContact {
         $i = 0;
         foreach ($this->phones as $v) {
             if ($i != 0) {
-                $str.=',';
+                $str.=', ';
             }
             $str .= "(" . $v->getCode() . ') ' . $v->getNumber();
             $i++;
