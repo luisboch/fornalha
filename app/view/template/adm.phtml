@@ -9,16 +9,18 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Pizzaria Fornalha Vinhedo</title>
+        <title>Geren. de Atividades | {{ title }}</title>
 
         <!-- Bootstrap core CSS -->
         <!-- Custom styles for this template -->
 
-        <link href="{{ url('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ url('css/bootstrap_adm.css') }}" rel="stylesheet">
         <!--<link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
         <link href="{{ url('css/carousel.css') }}" rel="stylesheet">
         <link href="{{ url('css/customizations.css') }}" rel="stylesheet">
         <link href="{{ url('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
+        <link href="{{ url('css/jquery.timepicker.css') }}" rel="stylesheet">
+        <link href="{{ url('css/datepicker.css') }}" rel="stylesheet">
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,6 +36,8 @@
         <script src="{{ url('js/bootstrap.min.js') }}"></script>
         <script src="{{ url('js/holder.js') }}"></script>
         <script src="{{ url('js/bootstrap-tagsinput.min.js') }}"></script>
+        <script src="{{ url('js/jquery.timepicker.min.js') }}"></script>
+        <script src="{{ url('js/bootstrap-datepicker.js') }}"></script>
 
         {% endblock %}
 
@@ -41,7 +45,7 @@
     <!-- NAVBAR
     ================================================== -->
     <body>
-        <div class="navbar navbar-default navbar-fixed-top"role="navigation">
+        <div class="navbar navbar-default navbar-fixed-top navbar-inverse"role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -50,7 +54,7 @@
                 </button>
                 <a class="navbar-brand" href="{{ url('admin') }}">Fornalha Vinhedo</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse navbar-inverse-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('admin') }}">Inicio</a></li>
                     <!--<li><a  href="index.php?p=pages/open/menu.php" >Cardápio</a></li>-->
@@ -82,7 +86,6 @@
                             <li class="dropdown-header">Outros itens</li>
                             <li><a href="?p=pages/adm/crudindex.php">Item</a></li>
                             <li><a href="?p=pages/adm/crudindex.php">Grupo</a></li>
-
                         </ul>
                     </li>
                 </ul>
@@ -105,21 +108,21 @@
             {% endblock %}
         </div>
         <!-- FOOTER -->
-        <footer class="bs-footer" style="background: #006742;clear: both">
-            <hr class="" />
-            <div class="container marketing">
+        <footer class="bs-footer" style="clear: both;margin-top: 10px;">
+            <div class="navbar navbar-default navbar-inverse" >
                 <div class="col-lg-4">
-                    <img class="img-rounded" src="images/layout/logo.gif" alt="Generic placeholder image">
                 </div>
                 <div class="col-lg-4">
-                    <p class="">Tv Santa Cruz, 1404 - final da indepedência - Pinheirinho</p>
-                    <p class="">Vinhedo, SP | CEP: 13280-000</p>
-                    <p class="">(19) 3876-2588</p>
                 </div> 
                 <div class="col-lg-4 text-right">
-                    <a href="#">Topo</a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Topo</a></li>
+                    </ul>
                 </div>
             </div>
         </footer>
+        <script type="text/javascript">
+$('.input-date').datepicker();
+        </script>
     </body>
 </html>

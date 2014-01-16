@@ -40,6 +40,13 @@ class User implements BasicEntity{
     /**
      *
      * @var type 
+     * @Column(type="datetime", name="last_update")
+     */
+    private $lastUpdate;
+    
+    /**
+     *
+     * @var type 
      * @Column(type="datetime", name="last_access")
      */
     private $lastAccess;
@@ -108,8 +115,12 @@ class User implements BasicEntity{
         $this->lastAccess = $lastAccess;
     }
 
-    public function setLastUpdate(\DateTime $date) {
-        throw new Exception("Not implemented yet!");
+    public function getLastUpdate() {
+        return $this->lastUpdate;
     }
 
+    public function setLastUpdate(DateTime $lastUpdate) {
+        $this->lastUpdate = $lastUpdate;
+    }
+    
 }
