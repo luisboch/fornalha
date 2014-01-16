@@ -1,5 +1,5 @@
 <?php
-
+require_once 'BasicEntity.php';
 /**
  * Description of User
  *
@@ -7,7 +7,7 @@
  * @since Jan 7, 2014
  * @Entity @Table(name="users")
  */
-class User {
+class User implements BasicEntity{
 
     /** @Id @Column(type="integer") @GeneratedValue * */
     private $id;
@@ -108,5 +108,8 @@ class User {
         $this->lastAccess = $lastAccess;
     }
 
+    public function setLastUpdate(\DateTime $date) {
+        throw new Exception("Not implemented yet!");
+    }
 
 }

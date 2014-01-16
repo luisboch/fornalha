@@ -1,5 +1,5 @@
 <?php
-
+require_once 'BasicEntity.php';
 /**
  * Description of State
  *
@@ -7,7 +7,7 @@
  * @since Jan 10, 2014
  * @Entity @Table(name="state")
  */
-class State {
+class State implements BasicEntity {
     
     /**
      *  @Id @Column(type="integer") @GeneratedValue
@@ -48,5 +48,17 @@ class State {
     public function setCode($code) {
         $this->code = $code;
     }
-    
+
+    public function getCreationDate() {
+        throw new Exception("Not implemented yet!");
+    }
+
+    public function setCreationDate(\DateTime $date) {
+        throw new Exception("Not implemented yet!");
+    }
+
+    public function setLastUpdate(\DateTime $date) {
+        throw new Exception("Not implemented yet!");
+    }
+
 }

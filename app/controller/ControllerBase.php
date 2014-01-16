@@ -1,6 +1,8 @@
 <?php
 
 require_once SERVICE_DIR . 'SessionManager.php';
+require_once SERVICE_DIR . 'Config.php';
+require_once APP_DIR . 'model/BasicDAO.php';
 
 // Include helpers
 require_once APP_DIR . 'components/volt/helpers.php';
@@ -17,15 +19,25 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
      */
     protected $session;
     
+    /**
+     * @var Config
+     */
+    protected $config;
 
     public function initialize() {
 
         // Start session
         $this->session = SessionManager::getInstance();
 
-        $this->view->title = 'Pizzaria Fornalha Vinhedo';
+        $this->view->title = "";
         
         $this->view->_session = $this->session;
+        
+        $this->config = Config::getInstance();
+    }
+    
+    protected function setTitle($title) {
+        $this->view->title = $title;
     }
 
     protected function showError($ex) {

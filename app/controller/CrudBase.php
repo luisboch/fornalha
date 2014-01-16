@@ -2,6 +2,7 @@
 
 require_once 'AdminBase.php';
 require_once APP_DIR . 'components/custom/Pagination.php';
+require_once 'utils/CrudStates.php';
 
 /**
  * Description of CrudBase
@@ -10,11 +11,12 @@ require_once APP_DIR . 'components/custom/Pagination.php';
  * @since Jan 8, 2014
  */
 abstract class CrudBase extends AdminBase {
-
+    
     private $_initialized = false;
     protected $instance;
     protected $results = array();
-    private $controllerName;
+    protected $controllerName;
+    protected $state;
 
     /**
      *
@@ -33,6 +35,7 @@ abstract class CrudBase extends AdminBase {
     protected $service;
 
     public function initialize(BasicService $service) {
+        $this->state= CrudStates::INITIALIZING;
         parent::initialize();
 
         $this->service = $service;
@@ -44,15 +47,15 @@ abstract class CrudBase extends AdminBase {
 
     public function indexAction() {
 
+        $this->state= CrudStates::INDEX_ACTION;
         try {
             $params = $this->getSearchParams();
 
-
             $this->view->results = $this->service->search(
-                    $params, true, DEFAULT_LIMITS_PER_PAGE, 0);
+                    $params, true, $this->config['pagination']['registers_limit_per_page'], 0);
 
             $totalResults = $this->service->searchCount($params, true);
-            $this->builPagination(1, $totalResults);
+            $this->builPagination(1, $totalResults, true);
 
             $this->view->pick($this->controllerName . "/search");
         } catch (Exception $ex) {
@@ -62,26 +65,40 @@ abstract class CrudBase extends AdminBase {
 
     public function searchAction($page = 1) {
 
+        $this->state= CrudStates::SEARCH_ACTION;
         try {
 
             $params = $this->getSearchParams();
 
             if ($this->beforeSearch()) {
-
+                $limitPerPage = $this->config['pagination']['registers_limit_per_page'];
                 $this->view->results = $this->service->search(
-                        $params, $this->showActiveResults, DEFAULT_LIMITS_PER_PAGE, $page * DEFAULT_LIMITS_PER_PAGE - DEFAULT_LIMITS_PER_PAGE);
+                        $params, $this->showActiveResults, $limitPerPage, $page * $limitPerPage - $limitPerPage);
 
                 $totalResults = $this->service->searchCount($params, $this->showActiveResults);
                 $this->builPagination($page, $totalResults);
 
                 $this->afterSearch();
+                $this->view->active = $this->showActiveResults;
             }
         } catch (Exception $ex) {
             $this->showError($ex);
         }
     }
-
+    
+    /**
+     * Alias to #viewAction
+     */
+    public function newAction() {
+        $this->state= CrudStates::NEW_ACTION;
+        
+        $this->dispatcher->forward(array('action' => 'view'));
+    } 
+    
     public function viewAction($id) {
+        
+        $this->state= CrudStates::VIEW_ACTION;
+        
         $this->checkInitialization();
 
         $this->resolveInstance($id);
@@ -91,6 +108,7 @@ abstract class CrudBase extends AdminBase {
 
     public function saveAction() {
 
+        $this->state= CrudStates::SAVE_ACTION;
         $this->checkInitialization();
 
         if ($this->request->isPost()) {
@@ -104,9 +122,6 @@ abstract class CrudBase extends AdminBase {
             } else {
                 $this->dispatcher->setParams(array('instance' => $this->instance));
                 $this->dispatcher->forward(array('action' => 'view'));
-
-                //Disable the view to avoid rendering
-                $this->view->disable();
                 return false;
             }
         } else {
@@ -114,25 +129,34 @@ abstract class CrudBase extends AdminBase {
         }
     }
 
-    private function builPagination($page, $total) {
+    private function builPagination($page, $total,  $forceFilterActiveTrue = NULL) {
         $pagination = new Pagination();
-        $pagination->setAmountLinkShow(9);
+        $pagination->setAmountLinkShow($this->config['pagination']['number_of_links_displayed']);
         $pagination->setCurrentPage($page);
-        $pagination->setAmountPerPage(DEFAULT_LIMITS_PER_PAGE);
+        $pagination->setAmountPerPage($this->config['pagination']['registers_limit_per_page']);
         $pagination->setTargetUrl($this->url->get($this->controllerName . '/search'));
         $pagination->setAmountRegisters($total);
-        $pagination->setQueryString($this->getQueryString());
+        $pagination->setQueryString($this->getQueryString(NULL, $forceFilterActiveTrue));
         $this->view->pagination = $pagination;
     }
 
-    protected function getQueryString() {
+    protected function getQueryString($ignore = NULL, $forceActiveTrue = NULL) {
         $query = "";
         $get = isset($_GET) ? $_GET : array();
+        $foundActive = false;
         foreach ($get as $k => $v) {
-            if ($k != '_url') {
+            if ($k != '_url'&& $k != $ignore) {
                 $query .= $k . '=' . urlencode($v) . '&';
             }
+            if ($k === 'active') {
+                $foundActive = true;
+            }
         }
+        
+        if(!$foundActive && $forceActiveTrue === true){
+            $query.='active=on';
+        }
+        
         return $query;
     }
 
@@ -157,7 +181,7 @@ abstract class CrudBase extends AdminBase {
             $this->response->redirect('error/show404');
         }
     }
-
+    
     protected function saveOrUpdate($instance) {
 
         $this->view->instance = $instance;
@@ -187,9 +211,6 @@ abstract class CrudBase extends AdminBase {
 
             $this->dispatcher->setParams(array('instance' => $this->instance));
             $this->dispatcher->forward(array('action' => 'view'));
-
-            //Disable the view to avoid rendering
-            $this->view->disable();
         } catch (Exception $ex) {
             $this->showError($ex);
         }
