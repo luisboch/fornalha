@@ -1,5 +1,6 @@
 <?php
 require_once 'SessionManager.php';
+require_once 'exceptions/ValidationException.php';
 /**
  * Description of BasicService
  *
