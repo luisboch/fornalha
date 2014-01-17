@@ -6,7 +6,6 @@ require_once APP_DIR . 'service/UserService.php';
 class SecurityController extends OpenBase {
 
     /**
-     *
      * @var UserService
      */
     private $service;
@@ -21,7 +20,6 @@ class SecurityController extends OpenBase {
     public function loginAction($target = '') {
         try {
             $this->view->targetUrl = $target;
-
             if ($this->request->isPost()) {
                 if ($this->security->checkToken()) {
                     $email = $this->request->getPost('email');
@@ -33,7 +31,7 @@ class SecurityController extends OpenBase {
                         $this->session->setUser($user);
                         $user->setLastAccess(new DateTime());
                         $this->service->update($user);
-                        $this->response->redirect('');
+                        $this->response->redirect('/admin');
                     } else {
                         $this->error("Email/Senha inválido(s)");
                         $this->session->setUser(null);

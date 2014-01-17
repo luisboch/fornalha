@@ -30,13 +30,13 @@ class CompanyAddress {
     private $observation;
     
     /**
-     *  @ManyToOne(targetEntity="State")
+     *  @ManyToOne(targetEntity="State", fetch="EAGER")
      *  @JoinColumn(name="state_id", referencedColumnName="id")
      *  @var State
      */
     private $state;
     /**
-     *  @ManyToOne(targetEntity="City")
+     *  @ManyToOne(targetEntity="City", fetch="EAGER")
      *  @JoinColumn(name="city_id", referencedColumnName="id")
      *  @var City
      */

@@ -20,7 +20,7 @@ class City implements BasicEntity{
     private $name;
 
     /**
-     *  @ManyToOne(targetEntity="State")
+     *  @ManyToOne(targetEntity="State", fetch="LAZY")
      *  @JoinColumn(name="state_id", referencedColumnName="id")
      *  @var State
      */

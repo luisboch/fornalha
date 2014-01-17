@@ -20,7 +20,7 @@ class CompanyContact {
     private $email;
 
     /**
-     * @OneToMany(targetEntity="CompanyPhone", mappedBy="contact", cascade={"all"},  orphanRemoval=true)
+     * @OneToMany(targetEntity="CompanyPhone", mappedBy="contact", cascade={"all"},  orphanRemoval=true, fetch="EAGER")
      * @var CompanyPhone[]
      */
     private $phones;

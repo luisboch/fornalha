@@ -17,12 +17,24 @@
         <div class="well">
             <fieldset>
                 <legend>Pesquisar</legend>
-                <form action="{{url(currentController ~ '/search')}}" method="get" class="form-horizontal">
+                <form action="{{url(currentController ~ '/search')}}" method="get">
                     <div class="form-group">
-                        <div class="col-lg-11 col-lg-offset-1">
-                            <input type="text" class="form-control " name="search" value="<?= $_GET['search']; ?>" />
-                        </div>
+                        <label for="search" >Nome</label>
+                        <input type="text" class="form-control " name="search" value="<?= $_GET['search']; ?>" />
                     </div>
+                    <div class="form-group" >
+                        <label for="district" class="control-label" >Tipo</label>
+                        <select class="form-control" name="type">
+                            <option value="">---Selecione---</option>
+                            {% for st in types %}
+                            <option 
+                                value="{{st.getId()}}" 
+                                {{ selectedType != null and selectedType == st.getId() ? 'selected':'' }} 
+                                    >{{st.getName()}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-lg-1 col-md-2 col-xs-12 col-lg-offset-9 col-md-offset-9">
                             <div class="checkbox">

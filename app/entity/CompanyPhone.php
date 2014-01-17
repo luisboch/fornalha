@@ -27,7 +27,7 @@ class CompanyPhone {
     private $number;
     
     /**
-     * @ManyToOne(targetEntity="CompanyContact", inversedBy="phones")
+     * @ManyToOne(targetEntity="CompanyContact", inversedBy="phones", fetch="EAGER")
      * @JoinColumn(name="contact_id", referencedColumnName="id")
      * @var CompanyContact
      */

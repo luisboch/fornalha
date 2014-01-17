@@ -24,7 +24,7 @@ class Company implements BasicEntity{
     private $name;
 
     /**
-     *  @OneToOne(targetEntity="CompanyAddress", cascade={"all"})
+     *  @OneToOne(targetEntity="CompanyAddress", cascade={"all"}, fetch="EAGER")
      *  @JoinColumn(name="address_id", referencedColumnName="id")
      *  @var CompanyAddress
      */
@@ -32,7 +32,7 @@ class Company implements BasicEntity{
     
     
     /**
-     * @OneToOne(targetEntity="CompanyContact", cascade={"all"})
+     * @OneToOne(targetEntity="CompanyContact", cascade={"all"}, fetch="EAGER")
      * @JoinColumn(name="contact_id", referencedColumnName="id")
      * @var CompanyContact
      */

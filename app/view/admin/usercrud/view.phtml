@@ -21,15 +21,15 @@
                     <input type="hidden" name="id" value="{{instance.getId()}}">
                     <div class="form-group">
                         <label for="name" >Nome</label>
-                        <input type="text" class="form-control" name="name" required placeholder="Meu Nome" value="{{instance.getName()}}"/>
+                        <input type="text" class="form-control" name="name" required placeholder="{{instance.getName()}}" value="{{instance.getName()}}"/>
                     </div>
                     <div class="form-group">
                         <label for="email" >Email</label>
-                        <input type="email" class="form-control" name="email" required placeholder="email@exemplo.com"  value="{{instance.getEmail()}}"/>
+                        <input type="email" class="form-control" name="email" required placeholder="{{instance.getEmail()}}"  value="{{instance.getEmail()}}"/>
                     </div>
                     <div class="form-group">
                         <label for="cpf" >CPF</label>
-                        <input type="text" class="form-control" name="cpf" required placeholder="00000000000" value="{{instance.getCpf()}}"/>
+                        <input type="text" class="form-control" name="cpf" required placeholder="{{instance.getCpf()}}" value="{{instance.getCpf()}}"/>
                     </div>
                     <div class="form-group">
                         <label for="passwd1" >Senha (6 caracteres)</label>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="form-group text-right" >
-                        <a class="btn btn-danger" href="{{url('usercrud')}}"  >Cancelar<span class="menu-icon glyphicon glyphicon-ban-circle"></span></a>
+                        <a class="btn btn-danger" href="{{url(currentController)}}"  >Cancelar<span class="menu-icon glyphicon glyphicon-ban-circle"></span></a>
                         <button type="submit" class="btn btn-success"  >Salvar<span class="menu-icon glyphicon glyphicon-ok"></span></button>
                     </div>
                 </form>
