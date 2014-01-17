@@ -7,7 +7,7 @@
                 <li>
                     <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-play"></span>Inicio</a>
                     <a href="{{ url(currentController ~ '/new') }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Novo</a>
-                    <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Pesquisar</a>
+                    <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-search"></span>Pesquisar</a>
                 </li>
             </ul>
         </div>
@@ -17,7 +17,7 @@
         <div class="well">
             <fieldset>
                 <legend>Dados</legend>
-                <form action="{{ url('producttype/save/') }}" method="post">
+                <form action="{{ url(currentController ~ '/save/') }}" method="post">
                     <input type="hidden" name="id" value="{{instance.getId()}}">
                     <div class="form-group">
                         <label for="name" >Nome</label>

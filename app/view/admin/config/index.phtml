@@ -1,122 +1,120 @@
 {% extends '../template/adm.phtml' %}
 {% block content %}
-<div class="container bs-docs-container">
-    <div class="row">
-        <div class="col-md-12" role="main">
-            <p>{{_session.getMessage()}}</p>
-            <h2>Configurações</h2>
-            <hr />
+<div class="row">
+    <div class="col-md-9 main-content col-md-offset-3" role="main">
+        {{_session.getMessage()}}
+        <div class="well">
             <form action="{{ url('config/save') }}" method="post" class="form-horizontal">
+                <fieldset>
+                    <legend>Dados da empresa</legend>
+                    <div class="form-group " >
+                        <label for="name" class="col-sm-2 control-label">Nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" placeholder="{{instance.getName()}}" value="{{instance.getName()}}"/>
+                        </div>
+                    </div>
 
-                <h3>Dados da empresa</h3>
-                <div class="form-group " >
-                    <label for="name" class="col-sm-2 control-label">Nome</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" placeholder="{{instance.getName()}}" value="{{instance.getName()}}"/>
-                    </div>
-                </div>
+                    <!--                <div class="form-group " >
+                                        <label for="name" class="col-sm-2 control-label">Logo</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" name="logo" />
+                                        </div>
+                                    </div>-->
+                </fieldset>
 
-                <!--                <div class="form-group " >
-                                    <label for="name" class="col-sm-2 control-label">Logo</label>
-                                    <div class="col-sm-10">
-                                        <input type="file" name="logo" />
-                                    </div>
-                                </div>-->
+                <fieldset>
+                    <legend>Endereço</legend>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label" >Logradouro</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"
+                                   name="street" 
+                                   placeholder="{{ instance.getAddress().getStreet() }}" 
+                                   value="{{ instance.getAddress().getStreet() }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="number" class="col-sm-2 control-label">Número</label>
+                        <div class="col-sm-10">
+                            <input type="number" min="1" class="form-control"
+                                   name="number"
+                                   placeholder="{{ instance.getAddress().getNumber() }}" 
+                                   value="{{ instance.getAddress().getNumber() }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="aux" class="col-sm-2 control-label">Complemento</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" 
+                                   name="observation" 
+                                   placeholder="{{ instance.getAddress().getObservation() }}" 
+                                   value="{{ instance.getAddress().getObservation() }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="aux" class="col-sm-2 control-label">CEP:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" 
+                                   name="street_code" 
+                                   placeholder="{{ instance.getAddress().getStreetCode() }}" 
+                                   value="{{ instance.getAddress().getStreetCode() }}" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="district" class="col-sm-2 control-label" >Estado</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="state_id" id="district">
+                                {% for st in states %}
+                                <option value="{{st.getId()}}" {{ instance.getAddress().getState().getId() == st.getId() ? 'selected' : '' }} >{{st.getName()}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
 
-                <hr />
-                <h3>Endereço</h3>
-                <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label" >Logradouro</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control"
-                               name="street" 
-                               placeholder="{{ instance.getAddress().getStreet() }}" 
-                               value="{{ instance.getAddress().getStreet() }}"/>
+                    <div class="form-group" >
+                        <label for="city" class="col-sm-2 control-label" >Cidade</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="city_id" id="city" >
+                                {% for ct in cities %}
+                                <option value="{{ct.getId()}}" {{ instance.getAddress().getCity() != null and instance.getAddress().getCity().getId() == ct.getId() ? 'selected' : '' }} >{{ct.getName()}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="number" class="col-sm-2 control-label">Número</label>
-                    <div class="col-sm-10">
-                        <input type="number" min="1" class="form-control"
-                               name="number"
-                               placeholder="{{ instance.getAddress().getNumber() }}" 
-                               value="{{ instance.getAddress().getNumber() }}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="aux" class="col-sm-2 control-label">Complemento</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" 
-                               name="observation" 
-                               placeholder="{{ instance.getAddress().getObservation() }}" 
-                               value="{{ instance.getAddress().getObservation() }}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="aux" class="col-sm-2 control-label">CEP:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" 
-                               name="street_code" 
-                               placeholder="{{ instance.getAddress().getStreetCode() }}" 
-                               value="{{ instance.getAddress().getStreetCode() }}" />
-                    </div>
-                </div>
-                <div class="form-group" >
-                    <label for="district" class="col-sm-2 control-label" >Estado</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="state_id" id="district">
-                            {% for st in states %}
-                            <option value="{{st.getId()}}" {{ instance.getAddress().getState().getId() == st.getId() ? 'selected' : '' }} >{{st.getName()}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
 
-                <div class="form-group" >
-                    <label for="city" class="col-sm-2 control-label" >Cidade</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="city_id" id="city" >
-                            {% for ct in cities %}
-                            <option value="{{ct.getId()}}" {{ instance.getAddress().getCity() != null and instance.getAddress().getCity().getId() == ct.getId() ? 'selected' : '' }} >{{ct.getName()}}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="form-group">
+                        <label for="aux" class="col-sm-2 control-label">Bairro:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" 
+                                   name="neighborhood" 
+                                   placeholder="{{ instance.getAddress().getNeighborhood() }}" 
+                                   value="{{ instance.getAddress().getNeighborhood() }}" />
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="aux" class="col-sm-2 control-label">Bairro:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" 
-                               name="neighborhood" 
-                               placeholder="{{ instance.getAddress().getNeighborhood() }}" 
-                               value="{{ instance.getAddress().getNeighborhood() }}" />
+                </fieldset>
+                <fieldset>
+                    <legend>Contato</legend>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2  control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="email" placeholder="{{instance.getContact().getEmail()}}" value="{{instance.getContact().getEmail()}}"/>
+                        </div>
                     </div>
-                </div>
-                <hr />
-                <h3>Contato</h3>
 
-                <div class="form-group">
-                    <label for="email" class="col-sm-2  control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" name="email" placeholder="{{instance.getContact().getEmail()}}" value="{{instance.getContact().getEmail()}}"/>
+                    <div class="form-group">
+                        <label for="phones" class="col-sm-2  control-label">Telefones</label>
+                        <div class="col-sm-10">
+                            <input type="text" data-role="tagsinput" class="form-control" style="width: 100%" name="phones"
+                                   value="{{instance.getContact().getPhonesAsString()}}"/>
+                            <p class="help-block">Para adicionar novos números, insira o número e tecle enter</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="phones" class="col-sm-2  control-label">Telefones</label>
-                    <div class="col-sm-10">
-                        <input type="text" data-role="tagsinput" class="form-control" style="width: 100%" name="phones"
-                               value="{{instance.getContact().getPhonesAsString()}}"/>
-                        <p class="help-block">Para adicionar novos números, insira o número e tecle enter</p>
+                    <div class="form-group text-right col-lg-12 col-xs-12" >
+                        <button type="submit" class="btn btn-danger"  >Cancelar<span class="menu-icon glyphicon glyphicon-ban-circle"></span></button>
+                        <button type="submit" class="btn btn-success"  >Salvar<span class="menu-icon glyphicon glyphicon-ok"></span></button>
                     </div>
-                </div>
-
-                <div class="form-group text-right col-lg-12 col-xs-12" >
-                    <button type="submit" class="btn btn-danger"  >Cancelar<span class="menu-icon glyphicon glyphicon-ban-circle"></span></button>
-                    <button type="submit" class="btn btn-success"  >Salvar<span class="menu-icon glyphicon glyphicon-ok"></span></button>
-                </div>
+                </fieldset>
             </form>
-
         </div>
     </div> 
 </div>

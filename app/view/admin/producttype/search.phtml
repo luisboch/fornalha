@@ -7,7 +7,7 @@
                 <li>
                     <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-play"></span>Inicio</a>
                     <a href="{{ url(currentController ~ '/new') }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Novo</a>
-                    <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Pesquisar</a>
+                    <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-search"></span>Pesquisar</a>
                 </li>
             </ul>
         </div>
@@ -17,7 +17,7 @@
         <div class="well">
             <fieldset>
                 <legend>Pesquisar</legend>
-                <form action="{{url('producttype/search')}}" method="get" class="form-horizontal">
+                <form action="{{url(currentController ~ '/search')}}" method="get" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-lg-11 col-lg-offset-1">
                             <input type="text" class="form-control " name="search" value="<?= $_GET['search']; ?>" />
