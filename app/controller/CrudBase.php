@@ -254,10 +254,10 @@ abstract class CrudBase extends AdminBase {
         
     }
 
-    /**
-     * @return boolean
-     */
     protected function beforeSearch() {
+        $active = $this->request->getQuery('active');
+        $this->showActiveResults = $active === 'on';
+        $this->view->active = $this->showActiveResults;
         return true;
     }
 

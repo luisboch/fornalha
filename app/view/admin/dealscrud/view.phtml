@@ -24,6 +24,34 @@
                         <input type="text" class="form-control" name="name" required placeholder="{{instance.getName()}}" value="{{instance.getName()}}"/>
                     </div>
                     <div class="form-group">
+                        <label for="name" >Descrição <span class="text-danger">*</span></label>
+                        <textarea class="form-control" name="description" >{{instance.getDescription()}}</textarea>
+                    </div>
+                    <div class="form-inline row">
+                        <div class="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                            <label class="control-label">Data inicial</label>
+                            <div class="input-date input-group date" data-date-format="dd/mm/yy" data-date="{{ formatDate( instance.getStartDateRange() ,'only-day') }}">
+                                <span class="input-group-btn add-on">
+                                    <button class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-calendar icon-calendar"></span>
+                                    </button>
+                                </span>
+                                <input type="text" class="form-control" name="startDate" value="{{ formatDate( instance.getStartDateRange() ,'only-day') }}"  >
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                            <label class="control-label">Data final</label>
+                            <div class="input-date input-group date" data-date-format="dd/mm/yy" data-date="{{ formatDate( instance.getEndDateRange() ,'only-day') }}">
+                                <span class="input-group-btn add-on">
+                                    <button class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-calendar icon-calendar"></span>
+                                    </button>
+                                </span>
+                                <input type="text" class="form-control" name="endDate" value="{{ formatDate( instance.getEndDateRange() ,'only-day') }}"  >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="active" {{instance.getActive()?'checked="checked"':''}} class="form-control"/>Ativo?

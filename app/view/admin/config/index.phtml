@@ -8,7 +8,7 @@
                 <fieldset>
                     <legend>Dados da empresa</legend>
                     <div class="form-group " >
-                        <label for="name" class="col-sm-2 control-label">Nome</label>
+                        <label for="name" class="col-sm-2 control-label">Nome <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="name" placeholder="{{instance.getName()}}" value="{{instance.getName()}}"/>
                         </div>
@@ -25,7 +25,7 @@
                 <fieldset>
                     <legend>Endereço</legend>
                     <div class="form-group">
-                        <label for="email" class="col-sm-2 control-label" >Logradouro</label>
+                        <label for="email" class="col-sm-2 control-label" >Logradouro <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control"
                                    name="street" 
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="number" class="col-sm-2 control-label">Número</label>
+                        <label for="number" class="col-sm-2 control-label">Número <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="number" min="1" class="form-control"
                                    name="number"
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="aux" class="col-sm-2 control-label">Complemento</label>
+                        <label for="aux" class="col-sm-2 control-label">Complemento <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" 
                                    name="observation" 
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="aux" class="col-sm-2 control-label">CEP:</label>
+                        <label for="aux" class="col-sm-2 control-label">CEP: <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" 
                                    name="street_code" 
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="form-group" >
-                        <label for="district" class="col-sm-2 control-label" >Estado</label>
+                        <label for="district" class="col-sm-2 control-label" >Estado <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <select class="form-control" name="state_id" id="district">
                                 {% for st in states %}
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="form-group" >
-                        <label for="city" class="col-sm-2 control-label" >Cidade</label>
+                        <label for="city" class="col-sm-2 control-label" >Cidade <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <select class="form-control" name="city_id" id="city" >
                                 {% for ct in cities %}
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="aux" class="col-sm-2 control-label">Bairro:</label>
+                        <label for="aux" class="col-sm-2 control-label">Bairro <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" 
                                    name="neighborhood" 
@@ -95,14 +95,14 @@
                 <fieldset>
                     <legend>Contato</legend>
                     <div class="form-group">
-                        <label for="email" class="col-sm-2  control-label">Email</label>
+                        <label for="email" class="col-sm-2  control-label">Email <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" name="email" placeholder="{{instance.getContact().getEmail()}}" value="{{instance.getContact().getEmail()}}"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="phones" class="col-sm-2  control-label">Telefones</label>
+                        <label for="phones" class="col-sm-2  control-label">Telefones <span class="text-danger">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" data-role="tagsinput" class="form-control" style="width: 100%" name="phones"
                                    value="{{instance.getContact().getPhonesAsString()}}"/>

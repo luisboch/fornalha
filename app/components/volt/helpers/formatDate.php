@@ -18,7 +18,7 @@ function formatDate($date, $format = NULL) {
                 $pattern = 'M, d \de Y H:i:s';
                 break;
             case 'only-day':
-                $pattern = 'd/m/Y';
+                $pattern = 'd/m/y';
                 break;
         }
     }
