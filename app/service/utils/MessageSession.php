@@ -34,7 +34,7 @@ class MessageSession {
 
     public function output() {
 
-        $html = "";
+        $html = "<p>";
 
         foreach ($this->messages as $m) {
             $html .= "<div class=\"" . $this->getClassByType($m->getType()) . "\">"
@@ -44,6 +44,7 @@ class MessageSession {
 
         $this->clear();
 
+        $html . '</p>';
         return $html;
     }
 

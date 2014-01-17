@@ -5,9 +5,12 @@
  * @param string $format use NULL for default pathern
  * @return type
  */
-function formatDate(DateTime $date, $format = NULL) {
+function formatDate($date, $format = NULL) {
+    if ($date == null) {
+        return '';
+    }
 
-    $pattern = 'd/m/Y H:i:s';
+    $pattern = 'd/m/y H:i';
 
     if ($format != NULL) {
         switch ($format) {
@@ -19,6 +22,6 @@ function formatDate(DateTime $date, $format = NULL) {
                 break;
         }
     }
-    
+
     return $date->format($pattern);
 }

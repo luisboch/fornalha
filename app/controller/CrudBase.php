@@ -11,7 +11,7 @@ require_once 'utils/CrudStates.php';
  * @since Jan 8, 2014
  */
 abstract class CrudBase extends AdminBase {
-    
+
     private $_initialized = false;
     protected $instance;
     protected $results = array();
@@ -35,7 +35,7 @@ abstract class CrudBase extends AdminBase {
     protected $service;
 
     public function initialize(BasicService $service) {
-        $this->state= CrudStates::INITIALIZING;
+        $this->state = CrudStates::INITIALIZING;
         parent::initialize();
 
         $this->service = $service;
@@ -47,7 +47,7 @@ abstract class CrudBase extends AdminBase {
 
     public function indexAction() {
 
-        $this->state= CrudStates::INDEX_ACTION;
+        $this->state = CrudStates::INDEX_ACTION;
         try {
             $params = $this->getSearchParams();
 
@@ -58,6 +58,7 @@ abstract class CrudBase extends AdminBase {
             $this->builPagination(1, $totalResults, true);
 
             $this->view->pick($this->controllerName . "/search");
+            $this->view->active = $this->showActiveResults;
         } catch (Exception $ex) {
             $this->showError($ex);
         }
@@ -65,7 +66,7 @@ abstract class CrudBase extends AdminBase {
 
     public function searchAction($page = 1) {
 
-        $this->state= CrudStates::SEARCH_ACTION;
+        $this->state = CrudStates::SEARCH_ACTION;
         try {
 
             $params = $this->getSearchParams();
@@ -85,20 +86,20 @@ abstract class CrudBase extends AdminBase {
             $this->showError($ex);
         }
     }
-    
+
     /**
      * Alias to #viewAction
      */
     public function newAction() {
-        $this->state= CrudStates::NEW_ACTION;
-        
+        $this->state = CrudStates::NEW_ACTION;
+
         $this->dispatcher->forward(array('action' => 'view'));
-    } 
-    
-    public function viewAction($id) {
-        
-        $this->state= CrudStates::VIEW_ACTION;
-        
+    }
+
+    public function viewAction($id = null) {
+
+        $this->state = CrudStates::VIEW_ACTION;
+
         $this->checkInitialization();
 
         $this->resolveInstance($id);
@@ -108,7 +109,7 @@ abstract class CrudBase extends AdminBase {
 
     public function saveAction() {
 
-        $this->state= CrudStates::SAVE_ACTION;
+        $this->state = CrudStates::SAVE_ACTION;
         $this->checkInitialization();
 
         if ($this->request->isPost()) {
@@ -129,7 +130,7 @@ abstract class CrudBase extends AdminBase {
         }
     }
 
-    private function builPagination($page, $total,  $forceFilterActiveTrue = NULL) {
+    private function builPagination($page, $total, $forceFilterActiveTrue = NULL) {
         $pagination = new Pagination();
         $pagination->setAmountLinkShow($this->config['pagination']['number_of_links_displayed']);
         $pagination->setCurrentPage($page);
@@ -145,18 +146,18 @@ abstract class CrudBase extends AdminBase {
         $get = isset($_GET) ? $_GET : array();
         $foundActive = false;
         foreach ($get as $k => $v) {
-            if ($k != '_url'&& $k != $ignore) {
+            if ($k != '_url' && $k != $ignore) {
                 $query .= $k . '=' . urlencode($v) . '&';
             }
             if ($k === 'active') {
                 $foundActive = true;
             }
         }
-        
-        if(!$foundActive && $forceActiveTrue === true){
+
+        if (!$foundActive && $forceActiveTrue === true) {
             $query.='active=on';
         }
-        
+
         return $query;
     }
 
@@ -181,7 +182,7 @@ abstract class CrudBase extends AdminBase {
             $this->response->redirect('error/show404');
         }
     }
-    
+
     protected function saveOrUpdate($instance) {
 
         $this->view->instance = $instance;

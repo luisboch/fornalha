@@ -10,6 +10,7 @@ class AdminController extends AdminBase{
     
     public function initialize() {
         parent::initialize();
+        $this->setTitle('Home');
     }
     
     public function indexAction() {

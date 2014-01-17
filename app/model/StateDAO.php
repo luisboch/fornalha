@@ -16,4 +16,13 @@ class StateDAO extends BasicDAO{
         return $this->find(array(), "name");
     }
 
+    public function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL) {
+        throw new Exception('Not implemented yet!');
+    }
+
+    public function searchCount($filters = array(), $activeOnly = NULL) {
+        throw new Exception('Not implemented yet!');
+    }
+
+
 }

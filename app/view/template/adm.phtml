@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
         {% block head %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +44,7 @@
     <!-- NAVBAR
     ================================================== -->
     <body>
-        <div class="navbar navbar-default navbar-fixed-top navbar-inverse"role="navigation">
+        <div class="navbar navbar-default navbar-fixed-top navbar-inverse" id="navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -78,7 +77,7 @@
                             <li class="divider"></li>
                             <li class="dropdown-header">Pizzas</li>
                             <li><a href="?p=pages/adm/crudindex.php">Sabores</a></li>
-                            <li><a href="?p=pages/adm/crudindex.php">Tipos</a></li>
+                            <li><a href="{{url('producttype')}}">Tipos</a></li>
 
                             <!-- new group -->
                             <li class="divider"></li>
@@ -101,8 +100,12 @@
                 </ul>
             </div>
         </div>
-        <div class="container">
-            <hr />
+        <div class="container" style="padding-right: 0px;">
+            <ol class="breadcrumb">
+                <li><a href="{{'admin'}}">Home</a></li>
+                <li class="active"><a href="{{ url(currentController) }}">{{title}}</a></li>
+            </ol>
+
             {% block content %}
             {% endblock %}
         </div>
@@ -125,3 +128,35 @@ $('.input-date').datepicker();
         </script>
     </body>
 </html>
+<script type="text/javascript">
+//    $(window).scroll(function(){
+//        $('.lock_scroll').each(function(){
+//           $(this).parent().append('<div></div>')
+//           if($(window).scrollTop() > $(this).offset().top ){
+//               $(this).css({
+//                   'position':'fixed',
+//                   'top':'0px',
+//                   'padding-top':'0px',
+//                   'margin-top':'0px'
+//               });
+//           }
+//        });
+//    });
+
+    setTimeout(function() {
+        var $sideBar = $('.bs-sidebar')
+        $sideBar.affix({
+            offset: {
+                top: function() {
+                    var offsetTop = $sideBar.offset().top
+                    var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10)
+                    var navOuterHeight = $('#navbar').outerHeight(true)
+                    return (this.top = offsetTop - navOuterHeight - sideBarMargin)
+                }
+                , bottom: function() {
+                    return (this.bottom = $('.bs-footer').outerHeight(true))
+                }
+            }
+        })
+    }, 100)
+</script>

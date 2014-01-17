@@ -33,6 +33,8 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         $this->view->_session = $this->session;
         
         $this->config = Config::getInstance();
+        
+        $this->view->currentController = $this->dispatcher->getControllerName();;
     }
     
     protected function setTitle($title) {

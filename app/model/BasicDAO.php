@@ -9,7 +9,7 @@ require_once SERVICE_DIR . 'Config.php';
  * @author luis
  * @since Jan 7, 2014
  */
-class BasicDAO {
+abstract class BasicDAO {
 
     public static $config;
 
@@ -102,7 +102,7 @@ class BasicDAO {
         return $query->getResult();
     }
 
-    public function search($filter = array()) {
+    public function simpleSearch($filter = array()) {
 
         $dql = "select x \nfrom " . $this->className . " x\n";
 
@@ -137,5 +137,7 @@ class BasicDAO {
             }
         }
     }
-
+    
+    public abstract function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL);
+    public abstract function searchCount($filters = array(), $activeOnly = NULL);
 }

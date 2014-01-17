@@ -17,7 +17,7 @@
         <div class="well">
             <fieldset>
                 <legend>Pesquisar</legend>
-                <form action="{{url('usercrud/search')}}" method="get" class="form-horizontal">
+                <form action="{{url('producttype/search')}}" method="get" class="form-horizontal">
                     <div class="form-group">
                         <div class="col-lg-11 col-lg-offset-1">
                             <input type="text" class="form-control " name="search" value="<?= $_GET['search']; ?>" />
@@ -43,25 +43,24 @@
                     <thead class="fixedthead" >
                         <tr>
                             <th class="col-xs-2 col-sm-1" >#</th>
-                            <th class="col-xs-4 col-sm-3" >Nome</th>
-                            <th class="col-xs-6 col-sm-4" >Email</th>
-                            <th class="hidden-xs col-sm-4">Último acesso</th>
+                            <th class="col-xs-5 col-sm-7" >Nome</th>
+                            <th class="col-xs-5 col-sm-4">Último update</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for u in results %}
                         <tr>
-                            <td><a href="{{ url('usercrud/view/' ~ u.getId()) }}"><span class=" glyphicon glyphicon-edit "></span></a></td>
+                            <td><a href="{{ url('producttype/view/' ~ u.getId()) }}"><span class=" glyphicon glyphicon-edit "></span></a></td>
                             <td>{{ u.getName() }}</td>
-                            <td>{{ u.getEmail() }}</td>
-                            <td class="hidden-xs ">{{ formatDate(u.getLastAccess())}}</td>
+                            <td class="hidden-xs ">{{ formatDate(u.getLastUpdate())}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-            {{ pagination }}
+                {{ pagination }}
             </fieldset>
         </div>
+
     </div>
 </div>
 {% endblock %}

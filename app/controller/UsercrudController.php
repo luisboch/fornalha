@@ -31,6 +31,8 @@ class UsercrudController extends CrudBase {
         $user->setCpf($this->request->getPost("cpf"));
 
         $user->setId($this->request->getPost("id"));
+        
+        $user->setActive($this->request->getPost('active') === 'on');
 
         if ($user->getId() == null || $this->request->getPost("passwd1") != '') {
             $user->setPassword($this->security->hash($this->request->getPost("passwd1")));

@@ -18,5 +18,13 @@ class CompanyDAO extends BasicDAO {
     public function getCompany() {
         return $this->findById(1);
     }
+    
+    public function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL) {
+        throw new Exception('Not implemented yet!');
+    }
+
+    public function searchCount($filters = array(), $activeOnly = NULL) {
+        throw new Exception('Not implemented yet!');
+    }
 
 }
