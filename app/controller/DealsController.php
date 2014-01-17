@@ -1,23 +1,28 @@
 <?php
+
 require_once 'OpenBase.php';
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once SERVICE_DIR . 'DealService.php';
 
 /**
  * Description of DealsController
  *
  * @author luis
  */
-class DealsController extends OpenBase{
+class DealsController extends OpenBase {
     
+    /**
+     *
+     * @var DealService
+     */
+    private $service;
     public function initialize() {
         parent::initialize();
-        $this->view->action = "Promoções";
+        $this->setTitle("Promoções");
+        $this->service = new DealService();
     }
 
-    public function indexAction(){
+    public function indexAction() {
+        $this->view->deals = $this->service->search(array(), true);
     }
+
 }

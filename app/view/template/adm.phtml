@@ -20,6 +20,7 @@
         <link href="{{ url('css/bootstrap-tagsinput.css') }}" rel="stylesheet">
         <link href="{{ url('css/jquery.timepicker.css') }}" rel="stylesheet">
         <link href="{{ url('css/datepicker.css') }}" rel="stylesheet">
+        <link href="{{ url('css/bootstrap-wysihtml5.css') }}" rel="stylesheet" />
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,6 +38,9 @@
         <script src="{{ url('js/bootstrap-tagsinput.min.js') }}"></script>
         <script src="{{ url('js/jquery.timepicker.min.js') }}"></script>
         <script src="{{ url('js/bootstrap-datepicker.js') }}"></script>
+
+        <script src="{{ url('js/wysihtml5-0.3.0.min.js') }}" type="text/javascript"></script>
+        <script src="{{ url('js/bootstrap3-wysihtml5.js') }}" type="text/javascript"></script>
 
         {% endblock %}
 
@@ -65,13 +69,13 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('usercrud') }}">Usuarios</a></li>
                             <li><a href="{{ url('config')}}">Configurações</a></li>
-                             <!--new group--> 
+                            <!--new group--> 
                             <li class="divider"></li>
                             <li class="dropdown-header">Produtos</li>
                             <li><a href="{{ url('product') }}">Item</a></li>
                             <li><a href="{{ url('producttype') }}">Tipos</a></li>
 
-                             <!--new group--> 
+                            <!--new group--> 
                             <li class="divider"></li>
                             <li class="dropdown-header">Outros</li>
                             <li><a href="{{ url('dealscrud') }}">Promoções</a></li>
@@ -96,7 +100,6 @@
                 <li><a href="{{'admin'}}">Home</a></li>
                 <li class="active"><a href="{{ url(currentController) }}">{{title}}</a></li>
             </ol>
-
             {% block content %}
             {% endblock %}
         </div>
@@ -120,19 +123,7 @@ $('.input-date').datepicker();
     </body>
 </html>
 <script type="text/javascript">
-//    $(window).scroll(function(){
-//        $('.lock_scroll').each(function(){
-//           $(this).parent().append('<div></div>')
-//           if($(window).scrollTop() > $(this).offset().top ){
-//               $(this).css({
-//                   'position':'fixed',
-//                   'top':'0px',
-//                   'padding-top':'0px',
-//                   'margin-top':'0px'
-//               });
-//           }
-//        });
-//    });
+    $('textarea.editor').wysihtml5();
 
     setTimeout(function() {
         var $sideBar = $('.bs-sidebar')

@@ -30,6 +30,8 @@ class DealService extends BasicService {
 
         if ($entity->getDescription() == '') {
             $v->addError("Preencha a descrição", 'description');
+        }else if(strlen($entity->getDescription()) > 4000){
+            $v->addError("A descrição deve conter no máximo 4000 caracteres", 'description');
         }
 
         if (!$v->isEmtpy()) {
