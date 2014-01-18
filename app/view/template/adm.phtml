@@ -97,7 +97,7 @@
         </div>
         <div class="container" style="padding-right: 0px;">
             <ol class="breadcrumb">
-                <li><a href="{{'admin'}}">Home</a></li>
+                <li><a href="{{'admin'}}">Inicio</a></li>
                 <li class="active"><a href="{{ url(currentController) }}">{{title}}</a></li>
             </ol>
             {% block content %}
@@ -118,7 +118,7 @@
             </div>
         </footer>
         <script type="text/javascript">
-$('.input-date').datepicker();
+            $('.input-date').datepicker();
         </script>
     </body>
 </html>
@@ -126,19 +126,19 @@ $('.input-date').datepicker();
     $('textarea.editor').wysihtml5();
 
     setTimeout(function() {
-        var $sideBar = $('.bs-sidebar')
+        var $sideBar = $('.bs-sidebar');
         $sideBar.affix({
             offset: {
                 top: function() {
-                    var offsetTop = $sideBar.offset().top
-                    var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10)
-                    var navOuterHeight = $('#navbar').outerHeight(true)
-                    return (this.top = offsetTop - navOuterHeight - sideBarMargin)
+                    var offsetTop = $sideBar.offset().top;
+                    var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10);
+                    var navOuterHeight = $('#navbar').outerHeight(true);
+                    return (this.top = offsetTop - navOuterHeight - sideBarMargin);
                 }
                 , bottom: function() {
-                    return (this.bottom = $('.bs-footer').outerHeight(true))
+                    return (this.bottom = $('.bs-footer').outerHeight(true));
                 }
             }
-        })
-    }, 100)
+        });
+    }, 100);
 </script>

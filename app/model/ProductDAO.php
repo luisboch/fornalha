@@ -73,7 +73,9 @@ class ProductDAO extends BasicDAO {
                 $q->andWhere($val);
             }
         }
-
+        
+        $q->orderBy('p.name');
+        
         $q->setParameters($params);
 
         if ($limit !== NULL) {

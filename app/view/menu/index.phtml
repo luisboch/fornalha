@@ -2,30 +2,11 @@
 {% block content %}
 <h2>Cardápio</h2>
 <hr />
-<h3>Pizzas</h3>
 <div class="row">
+    {% for t in types %}
     <div class="col-lg-4">
-        <h4><a href="{{ url('menu/category/43') }}" >Especiais</a></h4>
-        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+        <a href="{{ url('menu/all#' ~ t.getId()) }}" class=""><div class="well">{{ t.getName() }}<div class="pull-right"><span class="menu-icon glyphicon glyphicon-play"></span></div></div></a>
     </div>
-    <div class="col-lg-4">
-        <h4>Normais</h4>
-        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-    </div>
-    <div class="col-lg-4">
-        <h4>Economicas</h4>
-        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-    </div>
-</div>
-<h3>Outros</h3>
-<div class="row">
-    <div class="col-lg-4">
-        <h4><a href="{{ url('menu/category/42') }}">Bebidas</a></h4>
-        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-    </div>
-    <div class="col-lg-4">
-        <h4>Lanches</h4>
-        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-    </div>
+    {% endfor %}
 </div>
 {% endblock %}

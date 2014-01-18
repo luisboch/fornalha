@@ -38,6 +38,12 @@ class ProductType implements BasicEntity {
      */
     private $active = true;
     
+    /**
+     * @todo Criar relacionamento com produtos.
+     * @var type 
+     */
+    private $items = array();
+    
     public function getId() {
         return $this->id;
     }

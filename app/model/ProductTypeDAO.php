@@ -52,6 +52,8 @@ class ProductTypeDAO extends BasicDAO {
             }
         }
         
+        $q->orderBy('p.name');
+        
         $q->setParameters($params);
 
         if ($limit !== null) {

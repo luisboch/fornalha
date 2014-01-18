@@ -1,0 +1,27 @@
+{% extends 'template/open.phtml' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-3 ">
+        <div class="bs-sidebar hidden-print" role="complementary">
+            <ul class="nav bs-sidenav">
+                <li>
+                    {% for t in types %}
+                    <a href="#{{ t.getId() }}" class="list-group-item">{{ t.getName() }}</a>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9 main-content" role="main">
+        {{ _session.getMessage() }}
+        <div class="well">
+            {% for t in types %}
+            <a id="{{t.getId()}}}"></a>
+            <fieldset>
+                <legend>{{t.getName()}}</legend>
+            </fieldset>
+            {% endfor %}
+        </div>
+    </div>
+</div> 
+{% endblock %}
