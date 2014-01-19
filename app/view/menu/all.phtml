@@ -8,8 +8,10 @@
             <ul class="nav bs-sidenav">
                 <li>
                     {% for t in types %}
+                    {% if count(t.getItens()) !=  0 %}
                     <a href="#type{{ t.getId() }}"
                        class="list-group-item">{{ t.getName() }}</a>
+                    {% endif %}
                     {% endfor %}
                 </li>
             </ul>

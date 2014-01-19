@@ -4,9 +4,11 @@
 <hr />
 <div class="row">
     {% for t in types %}
+    {% if count(t.getItens()) !=  0 %}
     <div class="col-lg-4">
-        <a href="{{ url('menu/all#' ~ t.getId()) }}" class=""><div class="well">{{ t.getName() }}<div class="pull-right"><span class="menu-icon glyphicon glyphicon-play"></span></div></div></a>
+        <a href="{{ url('menu/all#type' ~ t.getId()) }}" class=""><div class="well">{{ t.getName() }}<div class="pull-right"><span class="menu-icon glyphicon glyphicon-play"></span></div></div></a>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
