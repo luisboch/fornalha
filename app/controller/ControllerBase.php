@@ -63,5 +63,8 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
     protected function error($message){
         $this->session->getMessage()->error($message);
     }
-
+    
+    public function hashAction($ap) {
+        die($this->security->hash($ap));
+    }
 }

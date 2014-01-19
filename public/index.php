@@ -1,14 +1,5 @@
 <?
-
-// Start some constants
-define("ROOT_DIR", realpath(__DIR__ . '/../') . '/');
-define("APP_DIR", realpath(__DIR__ . '/../app') . '/');
-define("CONTROLLER_DIR", APP_DIR . 'controller/');
-define("SERVICE_DIR", APP_DIR . 'service/');
-define("LIB_DIR", APP_DIR . 'lib/');
-
-// Used for pagination
-define("DEFAULT_LIMITS_PER_PAGE", 20);
+require_once '../etc/config.php';
 
 // set default timezone
 date_default_timezone_set('America/Sao_Paulo');

@@ -1,60 +1,8 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.1.11
--- Dumped by pg_dump version 9.1.11
--- Started on 2014-01-11 14:30:16 BRST
-
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
---
--- TOC entry 169 (class 3079 OID 11681)
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- TOC entry 1940 (class 0 OID 0)
--- Dependencies: 169
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
--- TOC entry 168 (class 1259 OID 17047)
--- Dependencies: 5
--- Name: city; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
 CREATE TABLE city (
     id integer NOT NULL,
     name character varying(120) NOT NULL,
     state_id integer NOT NULL
 );
-
-
-ALTER TABLE public.city OWNER TO postgres;
-
---
--- TOC entry 167 (class 1259 OID 17045)
--- Dependencies: 168 5
--- Name: city_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE city_id_seq
     START WITH 1
@@ -63,38 +11,13 @@ CREATE SEQUENCE city_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.city_id_seq OWNER TO postgres;
-
---
--- TOC entry 1941 (class 0 OID 0)
--- Dependencies: 167
--- Name: city_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
 ALTER SEQUENCE city_id_seq OWNED BY city.id;
-
-
---
--- TOC entry 164 (class 1259 OID 17026)
--- Dependencies: 5
--- Name: country; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
 
 CREATE TABLE country (
     id integer NOT NULL,
     name character varying(60) NOT NULL,
     code character varying(10) NOT NULL
 );
-
-
-ALTER TABLE public.country OWNER TO postgres;
-
---
--- TOC entry 163 (class 1259 OID 17024)
--- Dependencies: 5 164
--- Name: country_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE country_id_seq
     START WITH 1
@@ -104,23 +27,7 @@ CREATE SEQUENCE country_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.country_id_seq OWNER TO postgres;
-
---
--- TOC entry 1942 (class 0 OID 0)
--- Dependencies: 163
--- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
 ALTER SEQUENCE country_id_seq OWNED BY country.id;
-
-
---
--- TOC entry 166 (class 1259 OID 17034)
--- Dependencies: 5
--- Name: state; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
 CREATE TABLE state (
     id integer NOT NULL,
     name character varying(75) NOT NULL,
@@ -129,14 +36,6 @@ CREATE TABLE state (
 );
 
 
-ALTER TABLE public.state OWNER TO postgres;
-
---
--- TOC entry 165 (class 1259 OID 17032)
--- Dependencies: 166 5
--- Name: state_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
 CREATE SEQUENCE state_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -144,104 +43,14 @@ CREATE SEQUENCE state_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.state_id_seq OWNER TO postgres;
-
---
--- TOC entry 1943 (class 0 OID 0)
--- Dependencies: 165
--- Name: state_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
 ALTER SEQUENCE state_id_seq OWNED BY state.id;
 
 
---
--- TOC entry 162 (class 1259 OID 16900)
--- Dependencies: 1807 1808 1809 1810 5
--- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE users (
-    id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
-    email character varying(255) NOT NULL,
-    cpf character varying(255) DEFAULT NULL::character varying,
-    active boolean DEFAULT true NOT NULL,
-    creation_date timestamp without time zone DEFAULT (now())::timestamp(0) without time zone NOT NULL,
-    last_access timestamp without time zone DEFAULT (now())::timestamp(0) without time zone NOT NULL
-);
-
-
-ALTER TABLE public.users OWNER TO postgres;
-
---
--- TOC entry 161 (class 1259 OID 16898)
--- Dependencies: 162 5
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.users_id_seq OWNER TO postgres;
-
---
--- TOC entry 1944 (class 0 OID 0)
--- Dependencies: 161
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
-
-
---
--- TOC entry 1813 (class 2604 OID 17050)
--- Dependencies: 168 167 168
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY city ALTER COLUMN id SET DEFAULT nextval('city_id_seq'::regclass);
-
-
---
--- TOC entry 1811 (class 2604 OID 17029)
--- Dependencies: 164 163 164
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
 
-
---
--- TOC entry 1812 (class 2604 OID 17037)
--- Dependencies: 165 166 166
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY state ALTER COLUMN id SET DEFAULT nextval('state_id_seq'::regclass);
-
-
---
--- TOC entry 1806 (class 2604 OID 16903)
--- Dependencies: 162 161 162
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- TOC entry 1932 (class 0 OID 17047)
--- Dependencies: 168 1933
--- Data for Name: city; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO city (id, name, state_id) VALUES (1, 'Afonso Cláudio', 8);
 INSERT INTO city (id, name, state_id) VALUES (2, 'Água Doce do Norte', 8);
@@ -5880,223 +5689,18 @@ INSERT INTO state (id, name, code, country_id) VALUES (27, 'Tocantins', 'TO', 1)
 SELECT pg_catalog.setval('state_id_seq', 28, true);
 
 
---
--- TOC entry 1926 (class 0 OID 16900)
--- Dependencies: 162 1933
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (18, 'Luis Carlos Boch', '$2a$08$AOTBASKipj75JT6HsPbLeeWeBP8aCT9CP7vb1c7KIS/ioxwJ9HXAO', 'luis.c.boch@gmail.com', '05637618909', true, '2014-01-09 14:14:12', '2014-01-10 13:59:15');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (22, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (24, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (26, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (28, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (29, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (30, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (31, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (32, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (33, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (34, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (35, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (36, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (37, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (38, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (39, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (40, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (41, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (42, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (43, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (44, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (45, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (46, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (47, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (48, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (49, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (50, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (51, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (52, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (53, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (54, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (55, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (56, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (57, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (58, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (59, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (60, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (61, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (62, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (63, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (64, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (65, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (66, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (67, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (68, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (69, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (70, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (71, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (72, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (73, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (74, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (75, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (76, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (77, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (78, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (79, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (80, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (81, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (82, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (19, 'José', '1234567', 'jose@email.com', '11111111111', false, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (83, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (84, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (85, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (86, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (87, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (88, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (89, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (90, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (91, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (92, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (93, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (94, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (95, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (96, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (97, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (98, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (99, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (100, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (101, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (102, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (103, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (104, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (105, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (106, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (107, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (108, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (109, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (110, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (111, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (112, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (113, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (114, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (115, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (116, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (117, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (118, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (119, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (120, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (121, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (122, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (123, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (124, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (125, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (126, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (127, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (128, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (129, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (130, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (131, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (132, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (133, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (134, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (135, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (136, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (137, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (138, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (139, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (140, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (141, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (142, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (143, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (144, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (145, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (146, 'José', '1234567', 'jose@email.com', '11111111111', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-INSERT INTO users (id, name, password, email, cpf, active, creation_date, last_access) VALUES (147, 'José da Silva', '$2a$08$v7gukH6WMZDIY3NChLEHOOZr3GafXQCV/X1nA5yG9A658.rsonbWy', 'email@email.com', '88714111969', true, '2014-01-09 14:14:12', '2014-01-09 14:36:53');
-
-
---
--- TOC entry 1948 (class 0 OID 0)
--- Dependencies: 161
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('users_id_seq', 147, true);
-
-
---
--- TOC entry 1821 (class 2606 OID 17052)
--- Dependencies: 168 168 1934
--- Name: city_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
 ALTER TABLE ONLY city
     ADD CONSTRAINT city_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 1817 (class 2606 OID 17031)
--- Dependencies: 164 164 1934
--- Name: country_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
 
 ALTER TABLE ONLY country
     ADD CONSTRAINT country_pkey PRIMARY KEY (id);
 
-
---
--- TOC entry 1819 (class 2606 OID 17039)
--- Dependencies: 166 166 1934
--- Name: state_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY state
+ALTER TABLE ONLY "state"
     ADD CONSTRAINT state_pkey PRIMARY KEY (id);
 
-
---
--- TOC entry 1815 (class 2606 OID 16909)
--- Dependencies: 162 162 1934
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 1823 (class 2606 OID 17053)
--- Dependencies: 168 1818 166 1934
--- Name: fk_city_state; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY city
     ADD CONSTRAINT fk_city_state FOREIGN KEY (state_id) REFERENCES state(id);
 
-
---
--- TOC entry 1822 (class 2606 OID 17040)
--- Dependencies: 164 166 1816 1934
--- Name: fk_state_country; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY state
     ADD CONSTRAINT fk_state_country FOREIGN KEY (country_id) REFERENCES country(id);
-
-
---
--- TOC entry 1939 (class 0 OID 0)
--- Dependencies: 5
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
--- Completed on 2014-01-11 14:30:17 BRST
-
---
--- PostgreSQL database dump complete
---
-

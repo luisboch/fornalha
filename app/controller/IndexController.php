@@ -12,7 +12,11 @@ require_once 'OpenBase.php';
  * @author luis
  */
 class IndexController extends OpenBase {
-
+   
+    public function initialize() {
+        parent::initialize();
+    }
+    
     public function indexAction() {
         $this->view->action = 'Home';
     }
