@@ -42,6 +42,7 @@ try {
             $compiler = $volt->getCompiler();
 
             $compiler->addFunction('formatDate', 'formatDate');
+            $compiler->addFunction('count', 'count');
 
             return $volt;
         };
@@ -94,7 +95,7 @@ try {
     $application = new \Phalcon\Mvc\Application($di);
 
     echo $application->handle()->getContent();
-} catch (Exception $e) {
+} catch (\Exception $e) {
     echo "Exception: ", $e->getMessage();
     echo '<pre>';
     echo $e->getTraceAsString();

@@ -1,12 +1,15 @@
 {% extends 'template/open.phtml' %}
 {% block content %}
 <div class="row">
+
     <div class="col-md-3 ">
+        <span style="height: 20px;">&InvisibleTimes;</span>
         <div class="bs-sidebar hidden-print" role="complementary">
             <ul class="nav bs-sidenav">
                 <li>
                     {% for t in types %}
-                    <a href="#{{ t.getId() }}" class="list-group-item">{{ t.getName() }}</a>
+                    <a href="#type{{ t.getId() }}"
+                       class="list-group-item">{{ t.getName() }}</a>
                     {% endfor %}
                 </li>
             </ul>
@@ -16,12 +19,41 @@
         {{ _session.getMessage() }}
         <div class="well">
             {% for t in types %}
-            <a id="{{t.getId()}}}"></a>
+            {% if count(t.getItens()) !=  0 %}
+            <a id="type{{t.getId()}}" style="display: block;height: 50px;width: 10px"></a>
             <fieldset>
-                <legend>{{t.getName()}}</legend>
+                <legend  >{{ t.getName() }}</legend>
+                <div class="row">
+                    {% for p in t.getItens() %}
+                    <div class="container col-lg-4" style="height: 150px;">
+                        <h4>{{p.getName()}}</h4>
+                        <p class="text-justify help-block">{{p.getDescription()}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
             </fieldset>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
 </div> 
+<script type="text/javascript">
+
+    setTimeout(function() {
+        var $sideBar = $('.bs-sidebar');
+        $sideBar.affix({
+            offset: {
+                top: function() {
+                    var offsetTop = $sideBar.offset().top;
+                    var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10);
+                    var navOuterHeight = $('#navbar').outerHeight(true) + 18;
+                    return (this.top = offsetTop - navOuterHeight - sideBarMargin);
+                }
+                , bottom: function() {
+                    return (this.bottom = $('.bs-footer').outerHeight(true));
+                }
+            }
+        });
+    }, 100);
+</script>
 {% endblock %}

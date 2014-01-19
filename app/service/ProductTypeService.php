@@ -27,7 +27,15 @@ class ProductTypeService extends BasicService {
         if ($entity->getName() == '') {
             $v->addError("Preencha o nome", 'name');
         }
-
+        
+        if($entity->getViewPriority() == null ){
+            $v->addError("Preencha a prioridade de exibição", 'viewPriority');
+        }
+        
+        if($entity->getViewPriority() == null || !is_numeric($entity->getViewPriority())){
+            $v->addError('Insira um número inteiro na prioridade de exibição');
+        }
+        
         if (!$v->isEmtpy()) {
             throw $v;
         }

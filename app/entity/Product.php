@@ -57,7 +57,7 @@ class Product implements BasicEntity {
      * @var ProductType
      */
     private $type;
-
+    
     public function getId() {
         return $this->id;
     }
@@ -125,5 +125,4 @@ class Product implements BasicEntity {
     public function setType($type) {
         $this->type = $type;
     }
-
 }

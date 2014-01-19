@@ -64,7 +64,7 @@ class ProductController extends CrudBase {
         if ($type_id != '') {
             $p->setType($this->typeService->findById($type_id));
         }
-
+        
         $p->setActive($this->request->getPost('active') === 'on');
     }
 

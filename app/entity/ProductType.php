@@ -1,5 +1,7 @@
 <?php
+
 require_once 'BasicEntity.php';
+require_once 'Product.php';
 
 /**
  * Description of ProductType
@@ -9,41 +11,53 @@ require_once 'BasicEntity.php';
  * @Entity @Table(name="product_type")
  */
 class ProductType implements BasicEntity {
-    
+
     /**
      * @Id @Column(type="integer") @GeneratedValue
      * @var integer
      */
     private $id;
+
     /**
      * @Column(type="string")
      * @var string
      */
     private $name;
+
     /**
      * @Column(name="creation_date", type="datetime")
      * @var DateTime
      */
     private $creationDate;
-    
+
     /**
      * @Column(name="last_update", type="datetime")
      * @var DateTime
      */
     private $lastUpdate;
-    
+
     /**
      * @Column(name="active", type="boolean")
      * @var boolean 
      */
     private $active = true;
+
+    /**
+     * @OneToMany(targetEntity="Product", fetch="LAZY", mappedBy="type")
+     * @JoinColumn(name="type_id", referencedColumnName="id")
+     * @var Product[]
+     */
+    private $itens = array();
+    
     
     /**
-     * @todo Criar relacionamento com produtos.
-     * @var type 
+     *
+     * @Column(type="integer", nullable=false, name="view_priority")
+     * @var integer
      */
-    private $items = array();
-    
+    private $viewPriority = 0;
+
+
     public function getId() {
         return $this->id;
     }
@@ -75,7 +89,10 @@ class ProductType implements BasicEntity {
     public function setLastUpdate(DateTime $lastUpdate) {
         $this->lastUpdate = $lastUpdate;
     }
-
+    
+    /**
+     * @return boolean
+     */
     public function getActive() {
         return $this->active;
     }
@@ -84,4 +101,28 @@ class ProductType implements BasicEntity {
         $this->active = $active;
     }
     
+    /**
+     * 
+     * @return Product[]
+     */
+    public function getItens() {
+        return $this->itens;
+    }
+
+    /**
+     * 
+     * @param Product[] $items
+     */
+    public function setItens($items) {
+        $this->itens = $items;
+    }
+
+    public function getViewPriority() {
+        return $this->viewPriority;
+    }
+
+    public function setViewPriority($viewPriority) {
+        $this->viewPriority = $viewPriority;
+    }
+
 }

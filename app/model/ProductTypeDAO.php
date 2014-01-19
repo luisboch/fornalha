@@ -16,9 +16,9 @@ class ProductTypeDAO extends BasicDAO {
     }
 
     public function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL) {
-        
+
         $q = $this->em->createQueryBuilder();
-        
+
         $q->select("p")
                 ->from("ProductType", 'p');
 
@@ -51,9 +51,11 @@ class ProductTypeDAO extends BasicDAO {
                 }
             }
         }
-        
-        $q->orderBy('p.name');
-        
+
+        $q->orderBy('p.viewPriority', 'desc');
+        $q->addOrderBy('p.name');
+        $q->addOrderBy('p.lastUpdate');
+
         $q->setParameters($params);
 
         if ($limit !== null) {
@@ -63,16 +65,12 @@ class ProductTypeDAO extends BasicDAO {
         if ($offset !== null) {
             $q->setFirstResult($offset);
         }
-        
-        $q->orderBy('p.name');
-        $q->addOrderBy('p.lastUpdate');
-        
+
         return $q->getQuery()->getResult();
-        
     }
 
     public function searchCount($filters = array(), $activeOnly = NULL) {
-        
+
         $q = $this->em->createQueryBuilder();
         $q->select("count(p.id)")
                 ->from("ProductType", 'p');
@@ -106,9 +104,9 @@ class ProductTypeDAO extends BasicDAO {
                 }
             }
         }
-        
+
         $q->setParameters($params);
-        
+
         return $q->getQuery()->getSingleScalarResult();
     }
 

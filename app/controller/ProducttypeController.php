@@ -35,6 +35,9 @@ class ProducttypeController extends CrudBase {
      */
     protected function populatePostData($instance) {
         $instance->setName($this->request->getPost('name'));
+        
+        $instance->setViewPriority($this->request->getPost('view_priority'));
+        
         $instance->setActive($this->request->getPost('active') === 'on');
     }
 
