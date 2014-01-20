@@ -70,15 +70,24 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('usercrud') }}">Usuarios</a></li>
                             <li><a href="{{ url('config')}}">Configurações</a></li>
-                            <!--new group--> 
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Produtos</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                            Produtos
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
                             <li><a href="{{ url('product') }}">Item</a></li>
                             <li><a href="{{ url('producttype') }}">Tipos</a></li>
-
-                            <!--new group--> 
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Outros</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                            Outros
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
                             <li><a href="{{ url('dealscrud') }}">Promoções</a></li>
                         </ul>
                     </li>

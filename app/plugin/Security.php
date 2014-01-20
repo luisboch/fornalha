@@ -22,10 +22,8 @@ class Security extends Plugin {
         }
         
         //Take the active controller/action from the dispatcher
-        $controller = $dispatcher-> getActiveController();
-        
-//        $class=  ucfirst($controller.'Controller');
-        
+        $controller = $dispatcher->getActiveController();
+                
         if($controller instanceof AdminBase){ // Need to be autenticated.
             $dispatcher->forward(
                     array(

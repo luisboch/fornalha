@@ -31,7 +31,7 @@ class SecurityController extends OpenBase {
                         $this->session->setUser($user);
                         $user->setLastAccess(new DateTime());
                         $this->service->update($user);
-                        $this->response->redirect('/admin');
+                        $this->response->redirect('admin');
                     } else {
                         $this->error("Email/Senha inválido(s)");
                         $this->session->setUser(null);

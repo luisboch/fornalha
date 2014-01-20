@@ -17,7 +17,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
      * @var SessionManager
      */
     protected $session;
-    
+
     /**
      * @var Config
      */
@@ -29,14 +29,15 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         $this->session = SessionManager::getInstance();
 
         $this->view->title = "";
-        
+
         $this->view->_session = $this->session;
-        
+
         $this->config = Config::getInstance();
-        
-        $this->view->currentController = $this->dispatcher->getControllerName();;
+
+        $this->view->currentController = $this->dispatcher->getControllerName();
+        ;
     }
-    
+
     protected function setTitle($title) {
         $this->view->title = $title;
     }
@@ -47,24 +48,53 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
             'controller' => 'error',
             'action' => 'exception'));
     }
-    
-    protected function info($message){
+
+    /**
+     * Dispath the request to another action.
+     * 
+     * @param string $controller
+     * @param string $action
+     * @param array $params
+     */
+    public function dispatch($controller, $action, $params = NULL) {
+
+        $this->dispatcher->setParams($params);
+
+        if ($params !== NULL && is_array($params)) {
+            $this->dispatcher->setParams($params);
+        }
+        $this->dispatcher->forward(array(
+            'controller' => $controller,
+            'action' => $action));
+    }
+
+    /**
+     * Dispath the request to another action.
+     * 
+     * @param string $page can be "controller/action"
+     */
+    public function redirect($page) {
+        $this->response->redirect($page);
+    }
+
+    protected function info($message) {
         $this->session->getMessage()->info($message);
     }
-    
-    protected function warn($message){
+
+    protected function warn($message) {
         $this->session->getMessage()->warn($message);
     }
-    
-    protected function success($message){
+
+    protected function success($message) {
         $this->session->getMessage()->success($message);
     }
-    
-    protected function error($message){
+
+    protected function error($message) {
         $this->session->getMessage()->error($message);
     }
-    
+
     public function hashAction($ap) {
         die($this->security->hash($ap));
     }
+
 }

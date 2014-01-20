@@ -32,14 +32,14 @@ class User implements BasicEntity{
 
     /**
      *
-     * @var type 
+     * @var DateTime 
      * @Column(type="datetime", name="creation_date")
      */
     private $creationDate;
     
     /**
      *
-     * @var type 
+     * @var DateTime 
      * @Column(type="datetime", name="last_update")
      */
     private $lastUpdate;

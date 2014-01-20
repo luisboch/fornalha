@@ -39,7 +39,7 @@ class Controller
 
         $form->bind($this->container->get('request'), $form);
         if ($form->isValid()) {
-            $form->send($this->get('mailer'));
+            $form->sendContact($this->get('mailer'));
 
             $this->get('session')->setFlash('notice', 'Message sent!');
 

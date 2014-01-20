@@ -6,7 +6,7 @@
 <div class="text-justify">
     <h3>{{d.getName()}}</h3>
     {{ d.getDescription() }}
-    {% if d.getStartDateRange() is not empty or d.getEndDateRange() is not empty %}
+    {% if d.getStartDateRange() != null or d.getEndDateRange() != null  %}
     <p class="text-right text-warning">Válido 
         {{ d.getStartDateRange() is empty ? '' : 'apartir de  ' ~ formatDate(d.getStartDateRange(), 'only-day')  }}
         {{ d.getEndDateRange() is empty ? '' : ' até ' ~ formatDate(d.getEndDateRange(), 'only-day')  }}

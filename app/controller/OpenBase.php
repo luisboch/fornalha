@@ -11,7 +11,11 @@ require_once SERVICE_DIR . 'CompanyService.php';
  */
 class OpenBase extends ControllerBase {
     
-    private $company;
+    /**
+     *
+     * @var Company
+     */
+    protected $company;
     
     /**
      * @var CompanyService
