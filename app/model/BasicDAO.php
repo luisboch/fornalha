@@ -102,15 +102,15 @@ abstract class BasicDAO {
         return $query->getResult();
     }
 
-    public function simpleSearch($filter = array()) {
+    public function simpleSearch($filters = array()) {
 
         $dql = "select x \nfrom " . $this->className . " x\n";
 
-        if (count($params) > 0) {
+        if (count($filters) > 0) {
 
             $dql.="where";
             $i = 0;
-            foreach ($params as $k => $v) {
+            foreach ($filters as $k => $v) {
 
                 if ($i != 0) {
                     $dql.="and";

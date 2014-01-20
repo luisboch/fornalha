@@ -32,9 +32,7 @@ abstract class BasicService {
         $this->validate($entity);
         
         // Set creation date and last upadte values
-        $date = new DateTime();
-        $entity->setCreationDate($date);
-        $entity->setLastUpdate($date);
+        $this->updateEntityDates($entity);
         
         try {
             // Begin Transaction
@@ -44,6 +42,17 @@ abstract class BasicService {
         } catch (Exception $ex) {
             throw $ex;
         }
+    }
+    
+    protected function updateEntityDates(BasicEntity $e) {
+        // Set creation date and last upadte values
+        $date = new DateTime();
+        
+        if($e->getCreationDate() == null){
+            $e->setCreationDate($date);
+        }
+        
+        $e->setLastUpdate($date);
     }
     
     protected function saveRelations(BasicEntity $entity) {

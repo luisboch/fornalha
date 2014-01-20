@@ -10,7 +10,7 @@ require_once APP_DIR . 'entity/NewsLetter.php';
  */
 class NewsLetterDAO extends BasicDAO{
     public function __construct() {
-        parent::__construct('Contact');
+        parent::__construct('NewsLetter');
     }
     
     public function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL) {

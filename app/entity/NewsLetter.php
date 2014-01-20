@@ -1,9 +1,8 @@
 <?php
 require_once 'BasicEntity.php';
 /**
- * Description of Contact
  * @author luis
- * @Entity @Table(name="news_letter")
+ * @Entity @Table(name="newsletter")
  */
 class NewsLetter implements BasicEntity {
 
@@ -44,7 +43,16 @@ class NewsLetter implements BasicEntity {
      * @Column(type="boolean", name="receive_news")
      */
     private $receiveNews = true;
-
+    
+    /*
+     * ATENÇÃO: ao adicionar novos atributos, se não entram na tela de contatos, 
+     * devem ser devidamente recarregados na classe NewsLetterService método #save 
+     */
+    
+    /**
+     * 
+     * @return type
+     */
     public function getId() {
         return $this->id;
     }
