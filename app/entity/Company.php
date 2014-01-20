@@ -49,7 +49,13 @@ class Company implements BasicEntity{
      * @Column(type="datetime", name="last_update")
      */
     private $lastUpdate;
-
+    
+    
+    /**
+     * @var string
+     * @Column(type="string", name="about_us")
+     */
+    private $aboutUs;
     /**
      * @return int
      */
@@ -126,5 +132,12 @@ class Company implements BasicEntity{
     public function setLastUpdate(DateTime $lastUpdate) {
         $this->lastUpdate = $lastUpdate;
     }
+    
+    public function getAboutUs() {
+        return $this->aboutUs;
+    }
 
+    public function setAboutUs($aboutUs) {
+        $this->aboutUs = $aboutUs;
+    }
 }

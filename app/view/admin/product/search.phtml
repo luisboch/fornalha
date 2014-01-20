@@ -20,7 +20,7 @@
                 <form action="{{url(currentController ~ '/search')}}" method="get">
                     <div class="form-group">
                         <label for="search" >Nome</label>
-                        <input type="text" class="form-control " name="search" value="<?= $_GET['search']; ?>" />
+                        <input type="text" class="form-control " name="search" value="<?= array_key_exists('search', $_GET) ? $_GET['search'] : ''; ?>" />
                     </div>
                     <div class="form-group" >
                         <label for="district" class="control-label" >Tipo</label>

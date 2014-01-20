@@ -29,7 +29,7 @@ class CompanyService extends BasicService {
         if ($entity->getName() == '') {
             $v->addError('Preencha o nome da empresa', 'name');
         }
-
+        
         if ($entity->getAddress()->getStreet() == '') {
             $v->addError("Insira o logradouro", 'street');
         }
@@ -63,7 +63,11 @@ class CompanyService extends BasicService {
         if (count($entity->getContact()->getPhones()) === 0) {
             $v->addError("Insira pelo menos um telefone", 'phones');
         }
-
+        
+        if($entity->getAboutUs() == ''){
+            $v->addError("Preencha o campo \"Sobre nós\"", 'aboutUs');
+        }
+        
         if (!$v->isEmtpy()) {
             throw $v;
         }

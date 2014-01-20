@@ -86,6 +86,7 @@ class ConfigController extends AdminBase {
         try {
             $this->service->update($this->instance);
 
+            $this->success("Registro atualizado com sucesso");
             $this->response->redirect('config/index');
             $this->view->disable();
         } catch (ValidationException $ex) {
@@ -104,6 +105,7 @@ class ConfigController extends AdminBase {
 
         $instance->setName(
                 $this->request->getPost('name'));
+        $instance->setAboutUs($this->request->getPost('about_us'));
         $instance->getContact()->setEmail(
                 $this->request->getPost('email'));
 
@@ -116,6 +118,8 @@ class ConfigController extends AdminBase {
         $instance->getAddress()->setStreet($this->request->getPost('street'));
         $instance->getAddress()->setStreetCode($this->request->getPost('street_code'));
         $instance->getAddress()->setNeighborhood($this->request->getPost('neighborhood'));
+        $instance->getAddress()->setLatitude($this->request->getPost('latitude'));
+        $instance->getAddress()->setLongitude($this->request->getPost('longitude'));
     }
 
     /**
@@ -149,7 +153,7 @@ class ConfigController extends AdminBase {
 
         $post = $this->request->getPost('phones');
         $contact->getPhones()->clear();
-        
+
         $strings = split(',', $post);
 
         foreach ($strings as $v) {
