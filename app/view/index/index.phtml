@@ -8,36 +8,22 @@
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
-        <div class="item active">
-            <img data-src="" src="{{ url('img/layout/Img1.jpg') }}" alt="First slide">
+        {% for f in featured %}
+        <div class="item {{selectedFeaturedId == f.getId() ? 'active':''}}">
+            <img data-src="" src="{{ url('img' ~ f.getImage()) }}" alt="{{ f.getTitle() }}">
             <div class="container">
                 <div class="carousel-caption">
-                    <h3>Quarta da Pizza.</h3>
-                    <p>Aproveite as promoções de quarta feira</p>
-                    <p><a class="btn btn-lg btn-primary" href="?p=pages/open/deals.php" role="button">Saiba Mais &raquo;</a></p>
+                    <h3 class="hidden-xs">{{ f.getTitle() }}</h3>
+                    <h5 class="visible-xs">{{ f.getTitle() }}</h5>
+                    <p class="hidden-xs">{{ f.getSubtitle() }}</p>
+                    <h6 class="visible-xs">{{ f.getSubtitle() }}</h6>
+                    {% if f.getLink() != '' %}
+                    <p><a class="btn btn-lg btn-primary" href="{{f.getLink()}}" role="button">Saiba Mais &raquo;</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        <div class="item">
-            <img data-src="" src="{{ url('img/layout/Img2.jpg') }}" alt="First slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>Segunda maluca.</h3>
-                    <p>Todos os sabores com 30% de desconto</p>
-                    <p><a class="btn btn-lg btn-primary" href="?p=pages/open/deals.php" role="button">Saiba Mais &raquo;</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img data-src="" src="{{ url('img/layout/Img3.jpg') }}" alt="First slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>Dia da familia.</h3>
-                    <p>Traga a familia e ganhe desconto*</p>
-                    <p><a class="btn btn-lg btn-primary" href="?p=pages/open/deals.php" role="button">Saiba Mais &raquo;</a></p>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>

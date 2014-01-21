@@ -135,7 +135,7 @@ class Featured implements BasicEntity {
     }
 
     public function setViewPriority($viewPriority) {
-        $this->viewPriority = $viewPriority;
+        $this->viewPriority = (int) $viewPriority;
     }
 
 }

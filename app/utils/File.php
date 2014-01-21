@@ -106,7 +106,11 @@ class File {
         $arr = explode('/', $this->mimeType);
         return $arr[0] == 'image';
     }
-
+    
+    public function isFile() {
+        return is_file($this->fullPath);
+    }
+    
     /**
      * try delete a file, if found error thows Exception
      * @throws Exception

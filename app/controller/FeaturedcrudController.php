@@ -37,6 +37,8 @@ class FeaturedcrudController extends CrudBase {
         $instance->setTitle($this->request->getPost('title'));
         $instance->setSubtitle($this->request->getPost('subtitle'));
         $instance->setLink($this->request->getPost('link'));
+        $instance->setViewPriority($this->request->getPost('view_priority'));
+        $instance->setActive($this->request->getPost('active') === 'on');
 
         if ($this->request->hasFiles()) {
             try {
@@ -61,7 +63,7 @@ class FeaturedcrudController extends CrudBase {
             
             $oldFile = new File(IMAGE_DIR . $old);
             
-            if($oldFile->exists()){
+            if($oldFile->exists() && $oldFile->isFile()){
                 $oldFile->delete();
             }
             
