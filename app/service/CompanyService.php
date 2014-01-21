@@ -29,7 +29,7 @@ class CompanyService extends BasicService {
         if ($entity->getName() == '') {
             $v->addError('Preencha o nome da empresa', 'name');
         }
-        
+
         if ($entity->getAddress()->getStreet() == '') {
             $v->addError("Insira o logradouro", 'street');
         }
@@ -37,11 +37,11 @@ class CompanyService extends BasicService {
         if ($entity->getAddress()->getNumber() == '') {
             $v->addError("Insira o numero do endereço", 'number');
         }
-        
+
         if ($entity->getAddress()->getNeighborhood() == '') {
             $v->addError("Preencha o bairro", 'neighborhood');
         }
-        
+
         if ($entity->getAddress()->getStreetCode() == '') {
             $v->addError("Preencha o cep", 'streetCode');
         }
@@ -63,11 +63,18 @@ class CompanyService extends BasicService {
         if (count($entity->getContact()->getPhones()) === 0) {
             $v->addError("Insira pelo menos um telefone", 'phones');
         }
-        
-        if($entity->getAboutUs() == ''){
+
+        if ($entity->getAboutUs() == '') {
             $v->addError("Preencha o campo \"Sobre nós\"", 'aboutUs');
         }
-        
+
+        if ($entity->getAddress()->getLatitude() == '') {
+            $entity->getAddress()->setLatitude(0);
+        }
+        if ($entity->getAddress()->getLongitude() == '') {
+            $entity->getAddress()->setLongitude(0);
+        }
+
         if (!$v->isEmtpy()) {
             throw $v;
         }

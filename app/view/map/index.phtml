@@ -6,6 +6,7 @@
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCoE8wXVMOkGqnPYY5eeyIeSgQRpR06QI&sensor=false" >
 </script>
+{% if _company.getAddress().getLatitude() != 0 and _company.getAddress().getLongitude() != 0 %}
 <script type="text/javascript">
             function initialize() {
                     var pos = new google.maps.LatLng({{ _company.getAddress().getLatitude() }}, {{ _company.getAddress().getLongitude() }});
@@ -25,4 +26,5 @@
             }
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+{% endif %}
 {% endblock %}
