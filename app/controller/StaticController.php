@@ -18,14 +18,7 @@ class StaticController extends OpenBase {
     }
 
     public function aboutusAction() {
-        $this->view->action = "Sobre";
-    }
-    
-    public function contactAction() {
-        $this->view->action = "Contato";
-        if ($this->request->isPost() == true) {
-            // TODO: save message and/or send a email and/or sms
-        }
+        $this->setTitle("Sobre Nós");
     }
 
 }

@@ -1,5 +1,28 @@
 {% extends "template/open.phtml" %}
 {% block content %}
 <h2>Localização:</h2>
-<img src="{{ url('img/layout/map.png') }}" style="width: 100%"/>
+<div id="map-canvas" style="width: 100%; height: 500px" >
+
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCoE8wXVMOkGqnPYY5eeyIeSgQRpR06QI&sensor=false" >
+</script>
+<script type="text/javascript">
+            function initialize() {
+                    var pos = new google.maps.LatLng({{ _company.getAddress().getLatitude() }}, {{ _company.getAddress().getLongitude() }});
+                    var mapOptions = {
+                            center: pos,
+                            zoom: 16,
+                            streetViewControl: true,
+                            mapTypeControl: false,
+                            panControl: false 
+                    };
+                    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+                    var marker = new google.maps.Marker({
+                            position: pos,
+                            map: map,
+                            title:"{{_company.getName()}}"
+                    });
+            }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 {% endblock %}

@@ -9,7 +9,7 @@ require_once 'ControllerBase.php';
 class MapController extends OpenBase {
     public function initialize() {
         parent::initialize();
-        $this->view->action = "Mapa";
+        $this->setTitle("Mapa");
     }
     public function indexAction() {
     }

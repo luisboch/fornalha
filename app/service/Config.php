@@ -50,5 +50,12 @@ class Config implements ArrayAccess {
     public function getConfig() {
         return $this->arr;
     }
-
+    
+    public function isDev() {
+        return $this->arr['env']['stage'] === 'DEV';
+    }
+    
+    public function isProduction() {
+        return trim($this->arr['env']['stage']) === 'PROD';
+    }
 }
