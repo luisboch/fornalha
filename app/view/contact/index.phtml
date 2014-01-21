@@ -2,15 +2,15 @@
 {% block content %}
 {{_session.getMessage()}}
 <h2>Contato</h2>
-<p class="text-justify">Para nos contactar você pode utilizar o seguinte formunlário ou, se desejar, utilize o telefone disonível no rodapé da página.</p>
+<p class="text-justify">Para nos contactar você pode utilizar o seguinte formulário ou, se desejar, utilize o telefone disponível no rodapé da página.</p>
 <form role="form" action="{{ url('contact/send') }}" method="post">
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" value="{{instance.getEmail()}}" placeholder="exemplo@email.com">
+        <input type="email" class="form-control" name="email" value="{{instance.getEmail()}}" placeholder="exemplo@email.com" />
     </div>
     <div class="form-group">
         <label for="email">Nome</label>
-        <input type="text" class="form-control" name="name" value="{{instance.getName()}}"  placeholder="Meu Nome">
+        <input type="text" class="form-control" name="name" value="{{instance.getName()}}" />
     </div>
     <div class="form-group">
         <label for="mensagem">Mensagem</label>

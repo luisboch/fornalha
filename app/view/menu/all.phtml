@@ -27,10 +27,12 @@
                 <legend  >{{ t.getName() }}</legend>
                 <div class="row">
                     {% for p in t.getItens() %}
+                    {% if p.getActive() %}
                     <div class="container col-lg-4" style="height: 150px;">
                         <h4>{{p.getName()}}</h4>
                         <p class="text-justify help-block">{{p.getDescription()}}</p>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </fieldset>
