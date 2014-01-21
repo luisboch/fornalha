@@ -17,33 +17,33 @@
         <div class="well">
             <fieldset>
                 <legend>Dados</legend>
-                <form action="{{ url(currentController ~ 'save/') }}" method="post">
+                <form action="{{ url(currentController ~ '/save/') }}" method="post">
                     <input type="hidden" name="id" value="{{instance.getId()}}">
                     <div class="form-group">
                         <label for="name" >Nome <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" required placeholder="{{instance.getName()}}" value="{{instance.getName()}}"/>
+                        <input type="text" class="form-control" name="name" placeholder="{{instance.getName()}}" value="{{instance.getName()}}"/>
                     </div>
                     <div class="form-group">
                         <label for="email" >Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" name="email" required placeholder="{{instance.getEmail()}}"  value="{{instance.getEmail()}}"/>
+                        <input type="email" class="form-control" name="email" placeholder="{{instance.getEmail()}}"  value="{{instance.getEmail()}}"/>
                     </div>
                     <div class="form-group">
                         <label for="cpf" >CPF <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="cpf" required placeholder="{{instance.getCpf()}}" value="{{instance.getCpf()}}"/>
+                        <input type="text" class="form-control" name="cpf" placeholder="{{instance.getCpf()}}" value="{{instance.getCpf()}}"/>
                     </div>
                     <div class="form-group">
                         <label for="passwd1" >Senha (6 caracteres) <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" {{ instance.getId() is empty ? "required":"" }} name="passwd1" />
+                        <input type="password" class="form-control" name="passwd1" />
                     </div>
                     <div class="form-group">
                         <label for="passwd2" >Confirme a senha <span class="text-danger">*</span></label>
-                        <input  type="password" class="form-control" {{ instance.getId() is empty ? "required":"" }} name="passwd2" />
+                        <input  type="password" class="form-control" name="passwd2" />
                     </div>
 
                     <div class="form-group">
-                        <div class="checkbox">
+                        <div class="checkbox checkbox-inline">
                             <label>
-                                <input type="checkbox" name="active" {{instance.getActive()?'checked="checked"':''}} class="form-control"/>Ativo?
+                                <input type="checkbox" name="active" {{instance.getActive()?'checked="checked"':''}} />Ativo?
                             </label>
                         </div>
                     </div>

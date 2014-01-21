@@ -43,7 +43,7 @@ class FeaturedcrudController extends CrudBase {
                 $this->uploadImage($instance);
             } catch (InvalidTypeException $ex) {
                 $this->error("Falha no upload: o arquivo não é uma imagem válida");
-            } catch (FileUploadException $ex){
+            } catch (FileUploadException $ex) {
                 $this->logger->error($ex->getMessage());
                 $this->logger->error($ex->getTraceAsString());
                 $this->error("Houve um problema ao realizar o upload, contate suporte");
@@ -57,6 +57,14 @@ class FeaturedcrudController extends CrudBase {
         $files = $imgUpload->upload('image', 900, 498);
 
         if (count($files) == 1) {
+            $old = $f->getImage();
+            
+            $oldFile = new File(IMAGE_DIR . $old);
+            
+            if($oldFile->exists()){
+                $oldFile->delete();
+            }
+            
             $f->setImage($files[0]->getLink());
         }
     }

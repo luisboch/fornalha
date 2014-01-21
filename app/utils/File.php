@@ -1,46 +1,46 @@
 <?php
+
 require_once 'StringUtil.php';
+require_once 'exceptions/IllegalStateException.php';
 
 /**
-* Description of File
-*
-* @author luis
-* @since Jul 28, 2012
-*/
-class File
-{
+ * Description of File
+ *
+ * @author luis
+ * @since Jul 28, 2012
+ */
+class File {
 
     private $size;
     private $fullPath;
     private $mimeType;
     private $simpleName;
 
-    function __construct($fullPath)
-    {
+    function __construct($fullPath) {
         $this->fullPath = $fullPath;
-        $this->size = filesize($fullPath);
-        if($this->size === false){
-            throw new IllegalStateException("Failed to get size of File: \n".$this->fullPath);
-        }
-        $this->simpleName = $this->getFileName();
-        $this->mimeType = mime_content_type($fullPath);
-        
-        if($this->mimeType === false){
-            throw new IllegalStateException("Failed to get mimetype of File: ".$this->fullPath);
+        if ($this->exists()) {
+            $this->size = filesize($fullPath);
+            if ($this->size === false) {
+                throw new IllegalStateException("Failed to get size of File: \n" . $this->fullPath);
+            }
+            $this->simpleName = $this->getFileName();
+            $this->mimeType = mime_content_type($fullPath);
+
+            if ($this->mimeType === false) {
+                throw new IllegalStateException("Failed to get mimetype of File: " . $this->fullPath);
+            }
         }
     }
 
-    function exists()
-    {
+    function exists() {
         return file_exists($this->fullPath);
     }
 
     /**
-* @param string $dir
-* @return boolean
-*/
-    function moveTo($dir)
-    {
+     * @param string $dir
+     * @return boolean
+     */
+    function moveTo($dir) {
 
         if (is_dir($dir)) {
 
@@ -74,52 +74,44 @@ class File
         }
     }
 
-    function getDir()
-    {
+    function getDir() {
         return dirname($this->fullPath);
     }
 
-    public function getSize()
-    {
+    public function getSize() {
         return $this->size;
     }
 
-    public function getFullPath()
-    {
+    public function getFullPath() {
         return $this->fullPath;
     }
 
-    public function getMimeType()
-    {
+    public function getMimeType() {
         return $this->mimeType;
     }
 
-    public function getSimpleName()
-    {
+    public function getSimpleName() {
         return $this->simpleName;
     }
 
-    private function getFileName()
-    {
+    private function getFileName() {
         $pos1 = strrpos($this->fullPath, '/');
         return substr($this->fullPath, $pos1 + 1);
     }
 
     /**
-* @return boolean
-*/
-    public function isImage()
-    {
+     * @return boolean
+     */
+    public function isImage() {
         $arr = explode('/', $this->mimeType);
         return $arr[0] == 'image';
     }
 
     /**
-* try delete a file, if found error thows Exception
-* @throws Exception
-*/
-    public function delete()
-    {
+     * try delete a file, if found error thows Exception
+     * @throws Exception
+     */
+    public function delete() {
         if (unlink($this->fullPath)) {
             $this->fullPath = '';
             $this->mimeType = '';
@@ -129,4 +121,5 @@ class File
             throw new Exception('Check write Access to delete file!');
         }
     }
+
 }
