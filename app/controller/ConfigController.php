@@ -151,7 +151,7 @@ class ConfigController extends AdminBase {
      */
     private function parsePhones(CompanyContact $contact) {
 
-        $post = $this->request->getPost('phones');
+        $post = trim($this->request->getPost('phones'));
         $contact->getPhones()->clear();
 
         $strings = split(',', $post);
@@ -162,13 +162,14 @@ class ConfigController extends AdminBase {
 
             $code = trim(str_replace('(', '', $parts[0]));
             $number = trim($parts[1]);
+            if ($code != '' || $number != '') {
+                $phone = new CompanyPhone();
+                $phone->setCode($code);
+                $phone->setNumber($number);
+                $phone->setContact($contact);
 
-            $phone = new CompanyPhone();
-            $phone->setCode($code);
-            $phone->setNumber($number);
-            $phone->setContact($contact);
-
-            $contact->getPhones()->add($phone);
+                $contact->getPhones()->add($phone);
+            }
         }
     }
 

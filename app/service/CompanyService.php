@@ -62,6 +62,23 @@ class CompanyService extends BasicService {
 
         if (count($entity->getContact()->getPhones()) === 0) {
             $v->addError("Insira pelo menos um telefone", 'phones');
+        } else {
+            $foundPhoneError = false;
+            foreach ($entity->getContact()->getPhones() as $phone) {
+                if (!$foundPhoneError) {
+                    if ($phone->getCode() == '') {
+                        $v->addError("insira o código do telefone");
+                        $foundPhoneError = true;
+                    }
+
+                    if ($phone->getNumber() == '') {
+                        $v->addError("insira o número do telefone");
+                        $foundPhoneError = true;
+                    }
+                } else {
+                    break;
+                }
+            }
         }
 
         if ($entity->getAboutUs() == '') {
