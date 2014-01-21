@@ -69,13 +69,15 @@
         <footer class="bs-footer" style="background: #006742;clear: both">
             <hr class="" />
             <div class="container marketing">
-                <div class="col-lg-4">
+                <div class="col-lg-4 text-center">
                     <img class="img-rounded" src="{{ url("img/layout/logo.gif") }}" alt="Generic placeholder image">
                 </div>
                 <div class="col-lg-4">
-                    <p class="">{{ _company.getAddress().getStreet() }}, {{ _company.getAddress().getNumber() }} - {{ _company.getAddress().getObservation() }} - {{ _company.getAddress().getNeighborhood() }}</p>
-                    <p class="">{{ _company.getAddress().getCity().getName() }}, {{ _company.getAddress().getState().getCode() }} | CEP: {{ _company.getAddress().getStreetCode() }}</p>
-                    <p class="">{{ _company.getContact().getPhonesAsString() }}</p>
+                    <p class="text-center">{{ _company.getAddress().getStreet() }}, {{ _company.getAddress().getNumber() }} 
+                    <p class="text-center"> {{ _company.getAddress().getObservation() }}</p>
+                    <p class="text-center">{{ _company.getAddress().getNeighborhood() }}</p>
+                    <p class="text-center">{{ _company.getAddress().getCity().getName() }}, {{ _company.getAddress().getState().getCode() }} | CEP: {{ _company.getAddress().getStreetCode() }}</p>
+                    <p class="text-center">{{ _company.getContact().getPhonesAsString() }}</p>
                 </div> 
                 <div class="col-lg-4 text-right">
                     <a href="#">Topo</a> <br />

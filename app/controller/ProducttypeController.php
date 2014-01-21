@@ -1,7 +1,7 @@
 <?php
 
 require_once 'CrudBase.php';
-require SERVICE_DIR . 'ProductTypeService.php';
+require_once SERVICE_DIR . 'ProductTypeService.php';
 
 /**
  * Description of ProductTypeController
@@ -39,13 +39,5 @@ class ProducttypeController extends CrudBase {
         $instance->setViewPriority($this->request->getPost('view_priority'));
         
         $instance->setActive($this->request->getPost('active') === 'on');
-    }
-
-    protected function beforeSearch() {
-
-        $active = $this->request->getQuery('active');
-        $this->showActiveResults = $active === 'on';
-        $this->view->active = $this->showActiveResults;
-        return true;
     }
 }

@@ -1,0 +1,52 @@
+[Mon, 20 Jan 14 21:58:47 -0200][ERROR] Não foi possível realizar o upload [Mover para pasta especificada]
+[Mon, 20 Jan 14 21:58:47 -0200][ERROR] #0 /var/www/fornalha/app/controller/FeaturedcrudController.php(57): ImageUpload->upload('image')
+#1 /var/www/fornalha/app/controller/FeaturedcrudController.php(43): FeaturedcrudController->uploadImage(Object(Featured))
+#2 /var/www/fornalha/app/controller/CrudBase.php(120): FeaturedcrudController->populatePostData(Object(Featured))
+#3 [internal function]: CrudBase->saveAction()
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /var/www/fornalha/public/index.php(97): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Mon, 20 Jan 14 22:01:35 -0200][ERROR] Não foi possível realizar o upload [Mover para pasta especificada]
+[Mon, 20 Jan 14 22:01:35 -0200][ERROR] #0 /var/www/fornalha/app/controller/FeaturedcrudController.php(57): ImageUpload->upload('image')
+#1 /var/www/fornalha/app/controller/FeaturedcrudController.php(43): FeaturedcrudController->uploadImage(Object(Featured))
+#2 /var/www/fornalha/app/controller/CrudBase.php(120): FeaturedcrudController->populatePostData(Object(Featured))
+#3 [internal function]: CrudBase->saveAction()
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /var/www/fornalha/public/index.php(97): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Mon, 20 Jan 14 22:04:07 -0200][ERROR] Não foi possível realizar o upload [Mover para pasta específicada]
+[Mon, 20 Jan 14 22:04:07 -0200][ERROR] #0 /var/www/fornalha/app/utils/Upload.php(41): Upload->_upload(Array)
+#1 /var/www/fornalha/app/utils/ImageUpload.php(60): Upload->upload('image')
+#2 /var/www/fornalha/app/controller/FeaturedcrudController.php(57): ImageUpload->upload('image')
+#3 /var/www/fornalha/app/controller/FeaturedcrudController.php(43): FeaturedcrudController->uploadImage(Object(Featured))
+#4 /var/www/fornalha/app/controller/CrudBase.php(120): FeaturedcrudController->populatePostData(Object(Featured))
+#5 [internal function]: CrudBase->saveAction()
+#6 [internal function]: Phalcon\Dispatcher->dispatch()
+#7 /var/www/fornalha/public/index.php(97): Phalcon\Mvc\Application->handle()
+#8 {main}
+[Mon, 20 Jan 14 22:04:46 -0200][ERROR] Não foi possível realizar o upload [Mover para pasta específicada]
+[Mon, 20 Jan 14 22:04:46 -0200][ERROR] #0 /var/www/fornalha/app/utils/Upload.php(41): Upload->_upload(Array)
+#1 /var/www/fornalha/app/utils/ImageUpload.php(60): Upload->upload('image')
+#2 /var/www/fornalha/app/controller/FeaturedcrudController.php(57): ImageUpload->upload('image')
+#3 /var/www/fornalha/app/controller/FeaturedcrudController.php(43): FeaturedcrudController->uploadImage(Object(Featured))
+#4 /var/www/fornalha/app/controller/CrudBase.php(120): FeaturedcrudController->populatePostData(Object(Featured))
+#5 [internal function]: CrudBase->saveAction()
+#6 [internal function]: Phalcon\Dispatcher->dispatch()
+#7 /var/www/fornalha/public/index.php(97): Phalcon\Mvc\Application->handle()
+#8 {main}
+[Mon, 20 Jan 14 22:05:41 -0200][ERROR] Não foi possível realizar o upload [Mover para pasta especificada]
+[Mon, 20 Jan 14 22:05:41 -0200][ERROR] #0 /var/www/fornalha/app/controller/FeaturedcrudController.php(57): ImageUpload->upload('image')
+#1 /var/www/fornalha/app/controller/FeaturedcrudController.php(43): FeaturedcrudController->uploadImage(Object(Featured))
+#2 /var/www/fornalha/app/controller/CrudBase.php(120): FeaturedcrudController->populatePostData(Object(Featured))
+#3 [internal function]: CrudBase->saveAction()
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /var/www/fornalha/public/index.php(97): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Mon, 20 Jan 14 22:06:30 -0200][ERROR] Não foi possível realizar o upload [Mover para pasta especificada]
+[Mon, 20 Jan 14 22:06:30 -0200][ERROR] #0 /var/www/fornalha/app/controller/FeaturedcrudController.php(57): ImageUpload->upload('image')
+#1 /var/www/fornalha/app/controller/FeaturedcrudController.php(43): FeaturedcrudController->uploadImage(Object(Featured))
+#2 /var/www/fornalha/app/controller/CrudBase.php(120): FeaturedcrudController->populatePostData(Object(Featured))
+#3 [internal function]: CrudBase->saveAction()
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /var/www/fornalha/public/index.php(97): Phalcon\Mvc\Application->handle()
+#6 {main}

@@ -14,6 +14,12 @@ require_once APP_DIR . 'components/volt/helpers.php';
 class ControllerBase extends \Phalcon\Mvc\Controller {
 
     /**
+     *
+     * @var Phalcon\Logger\Adapter\File
+     */
+    protected $logger;
+
+    /**
      * @var SessionManager
      */
     protected $session;
@@ -35,7 +41,8 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         $this->config = Config::getInstance();
 
         $this->view->currentController = $this->dispatcher->getControllerName();
-        ;
+
+        $this->logger = new Phalcon\Logger\Adapter\File(ROOT_DIR . 'logs/app.log');
     }
 
     protected function setTitle($title) {

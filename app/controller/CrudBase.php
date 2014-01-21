@@ -35,8 +35,9 @@ abstract class CrudBase extends AdminBase {
     protected $service;
 
     public function initialize(BasicService $service) {
-        $this->state = CrudStates::INITIALIZING;
         parent::initialize();
+        
+        $this->state = CrudStates::INITIALIZING;
 
         $this->service = $service;
         $this->_initialized = true;

@@ -1,0 +1,92 @@
+{% extends '../template/adm.phtml' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-3 ">
+        <div class="bs-sidebar hidden-print" role="complementary">
+            <ul class="nav bs-sidenav">
+                <li>
+                    <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-play"></span>Inicio</a>
+                    <a href="{{ url(currentController ~ '/new') }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-edit"></span>Novo</a>
+                    <a href="{{ url(currentController) }}" class="list-group-item" ><span class="menu-icon glyphicon glyphicon-search"></span>Pesquisar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9 main-content" role="main">
+        {{ _session.getMessage() }}
+        <div class="well">
+            <fieldset>
+                <legend>Dados</legend>
+                <form action="{{ url(currentController ~ '/save/') }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{{instance.getId()}}">
+                    <div class="form-group">
+                        <label class="control-label" for="name" >Título <span class="text-danger">*</span></label>
+                        <input type="text" 
+                               class="form-control" 
+                               name="title" 
+                               placeholder="{{instance.getTitle()}}" 
+                               value="{{instance.getTitle()}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label" >Subtítulo <span class="text-danger">*</span></label>
+                        <input  type="text" 
+                                class="form-control" 
+                                name="subtitle" 
+                                placeholder="{{instance.getSubtitle()}}" 
+                                value="{{instance.getSubtitle()}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="link" >Link</label>
+                        <input type="text" 
+                               class="form-control" 
+                               name="link" 
+                               placeholder="{{instance.getLink()}}" 
+                               value="{{instance.getLink()}}"/>
+                    </div>
+                    {% if instance.getImage() != '' %}
+                    <div class="form-group">
+                        <label class="control-label">Imagem já cadastrada</label>
+                        <div class="input-group">
+                            <img src="{{url('img' ~ instance.getImage())}}" class="img-thumbnail img-responsive featured-image" /> 
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="link" >Imagem
+                            {% if instance.getImage() == '' %}
+                            <span class="text-danger">*</span>
+                            {% endif %}
+                        </label>
+                        <input type="file" name="image" />
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" 
+                                   name="active" 
+                                   {{instance.getActive()?'checked="checked"':''}} 
+                                   />Ativo?
+                        </label>
+                    </div>
+                    <div class="form-group text-right" >
+                        <a class="btn btn-danger" href="{{url(currentController)}}"  >Cancelar<span class="menu-icon glyphicon glyphicon-ban-circle"></span></a>
+                        <button type="submit" class="btn btn-success"  >Salvar<span class="menu-icon glyphicon glyphicon-ok"></span></button>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+</div> 
+<style type="text/css">
+    @media(min-width: 300px){
+        .featured-image{
+            max-width: 300px;
+        }
+    }
+
+    @media(min-width: 768px){
+        .featured-image{
+            max-width: 500px;
+        }
+    }
+</style>
+{% endblock %}
