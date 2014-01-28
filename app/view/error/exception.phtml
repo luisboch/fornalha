@@ -1,9 +1,14 @@
 {% extends 'template/open.phtml' %}
 {% block content %}
 <div class="panel col-lg-12 col-md-12 col-xs-12" style="margin: auto;float:none" >
+    {% if not _config.isProduction() %}
     <p class="lead">Ops, encontramos um erro: <span>"{{message}}"</span></p>
     <div style="padding-left: 15px" >
         <pre>{{trace}}</pre>
     </div>
+    {% endif %}
+    {% if _config.isProduction() %}
+    <p class="lead">Ops, encontramos um erro, tente novamente mais tarde ou contate suporte</p>
+    {% endif %}
 </div>
 {% endblock %}

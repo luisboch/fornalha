@@ -8,11 +8,11 @@
     {{ d.getDescription() }}
     {% if d.getStartDateRange() != null or d.getEndDateRange() != null  %}
     <p class="text-right text-warning">Válida 
-        {{ d.getStartDateRange() is empty ? '' : 'apartir de  ' ~ formatDate(d.getStartDateRange(), 'only-day')  }}
-        {{ d.getEndDateRange() is empty ? '' : ' até ' ~ formatDate(d.getEndDateRange(), 'only-day')  }}
+        {{ d.getStartDateRange() == null ? '' : 'apartir de  ' ~ formatDate(d.getStartDateRange(), 'only-day')  }}
+        {{ d.getEndDateRange() == null ? '' : ' até ' ~ formatDate(d.getEndDateRange(), 'only-day')  }}
     </p>
+    {% endif %}
 </div>
-{% endif %}
 {% endfor %}
 {% if count(deals) == 0 %}
 <p class="text-warning">Não temos nenhuma promoção ativa no momento.</p>

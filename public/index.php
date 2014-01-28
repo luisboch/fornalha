@@ -1,6 +1,9 @@
 <?
-require_once '../etc/config.php';
 
+require_once '../etc/config.php';
+require_once SERVICE_DIR . 'Config.php';
+
+$app_config = Config::getInstance();
 // set default timezone
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -16,11 +19,13 @@ try {
     $di = new Phalcon\DI\FactoryDefault();
 
 
-
     //Setup a base URI so that all generated URIs include the "fornalha" folder
     $di->set('url', function() {
         $url = new \Phalcon\Mvc\Url();
-        $url->setBaseUri('/fornalha/');
+        $config = Config::getInstance();
+        if ($config['env']['path'] != '') {
+            $url->setBaseUri($config['env']['path']);
+        }
         return $url;
     });
 
@@ -33,11 +38,18 @@ try {
         $viewEngineFunction = function($view, $di) {
             $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
 
-            $volt->setOptions(array(
-                "compiledPath" => "/tmp/compiled-templates",
-                "compiledExtension" => ".compiled",
-                'compileAlways' => true
-            ));
+            $config = Config::getInstance();
+            if ($config->isProduction()) {
+                $volt->setOptions(array(
+                    "compiledExtension" => ".compiled",
+                ));
+            } else {
+                $volt->setOptions(array(
+                    "compiledPath" => "/tmp/compiled-templates",
+                    "compiledExtension" => ".compiled",
+                    'compileAlways' => true
+                ));
+            }
 
             $compiler = $volt->getCompiler();
 
@@ -54,7 +66,7 @@ try {
 
         return $view;
     });
-    
+
     // Get class/action not found error    
     $di->set('dispatcher', function() use ($di) {
         $evManager = $di->getShared('eventsManager');
@@ -78,7 +90,7 @@ try {
             }
             return false;
         });
-        
+
         //Instantiate the Security plugin
         $security = new Security($di);
 
@@ -87,7 +99,7 @@ try {
 
         $dispatcher = new \Phalcon\Mvc\Dispatcher();
         $dispatcher->setEventsManager($evManager);
-        
+
         return $dispatcher;
     }, true);
 
@@ -96,8 +108,12 @@ try {
 
     echo $application->handle()->getContent();
 } catch (\Exception $e) {
-    echo "Exception: ", $e->getMessage();
-    echo '<pre>';
-    echo $e->getTraceAsString();
-    echo '</pre>';
+    if (!$app_config->isProduction()) {
+        echo "Exception: ", $e->getMessage();
+        echo '<pre>';
+        echo $e->getTraceAsString();
+        echo '</pre>';
+    } else {
+        header('Location: ' . $config['env']['path'] . '/error/exception');
+    }
 }
