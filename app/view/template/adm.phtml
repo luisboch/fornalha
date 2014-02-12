@@ -6,7 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="author" content="Luis Boch">
+        
 
         <title>Administrativo | {{ title }}</title>
 
@@ -108,7 +109,7 @@
         </div>
         <div class="container" style="padding-right: 0px;">
             <ol class="breadcrumb">
-                <li><a href="{{'admin'}}">Inicio</a></li>
+                <li><a href="{{url('admin')}}">Inicio</a></li>
                 <li class="active"><a href="{{ url(currentController) }}">{{title}}</a></li>
             </ol>
             {% block content %}

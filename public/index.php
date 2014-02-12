@@ -42,6 +42,7 @@ try {
             if ($config->isProduction()) {
                 $volt->setOptions(array(
                     "compiledExtension" => ".compiled",
+                    "compiledPath" => "/var/www/volt-temp-files/compiled-templates",
                 ));
             } else {
                 $volt->setOptions(array(
