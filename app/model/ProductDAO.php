@@ -25,7 +25,6 @@ class ProductDAO extends BasicDAO {
         $q->join('p.type', 't');
 
         $where = array();
-        $emptyWhere = true;
         $params = array();
 
         $i = 1;
@@ -34,7 +33,6 @@ class ProductDAO extends BasicDAO {
 
             $where[$i] = $q->expr()->like('p.name', '?' . $i);
             $params[$i] = $filters['search'];
-            $emptyWhere = false;
             $i++;
         }
 
@@ -49,8 +47,6 @@ class ProductDAO extends BasicDAO {
                 $params[$i] = '%' . $filters['type'] . '%';
                 $i++;
             }
-
-            $emptyWhere = false;
         }
 
         if ($activeOnly !== null) {
@@ -58,13 +54,11 @@ class ProductDAO extends BasicDAO {
             $where[$i] = $q->expr()->eq('p.active', '?' . $i);
             $params[$i] = $activeOnly;
             $i++;
-
-            $where[$i] = $q->expr()->eq('t.active', '?' . $i);
-            $params[$i] = $activeOnly;
-            $i++;
-
-            $emptyWhere = false;
         }
+
+        $where[$i] = $q->expr()->eq('t.active', '?' . $i);
+        $params[$i] = true;
+        $i++;
 
         foreach ($where as $k => $val) {
             if ($k === 1) {
@@ -73,9 +67,9 @@ class ProductDAO extends BasicDAO {
                 $q->andWhere($val);
             }
         }
-        
+
         $q->orderBy('p.name');
-        
+
         $q->setParameters($params);
 
         if ($limit !== NULL) {
@@ -99,16 +93,13 @@ class ProductDAO extends BasicDAO {
         $q->join('p.type', 't');
 
         $where = array();
-        $emptyWhere = true;
         $params = array();
 
         $i = 1;
 
         if (isset($filters['search']) && $filters['search'] != '') {
-
             $where[$i] = $q->expr()->like('p.name', '?' . $i);
             $params[$i] = $filters['search'];
-            $emptyWhere = false;
             $i++;
         }
 
@@ -123,22 +114,18 @@ class ProductDAO extends BasicDAO {
                 $params[$i] = '%' . $filters['type'] . '%';
                 $i++;
             }
-
-            $emptyWhere = false;
         }
 
-        if ($activeOnly === null) {
+        if ($activeOnly !== null) {
 
             $where[$i] = $q->expr()->eq('p.active', '?' . $i);
             $params[$i] = $activeOnly;
             $i++;
-
-            $where[$i] = $q->expr()->eq('t.active', '?' . $i);
-            $params[$i] = $activeOnly;
-            $i++;
-
-            $emptyWhere = false;
         }
+
+        $where[$i] = $q->expr()->eq('t.active', '?' . $i);
+        $params[$i] = true;
+        $i++;
 
         foreach ($where as $k => $val) {
             if ($k === 1) {

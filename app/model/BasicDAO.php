@@ -2,6 +2,7 @@
 
 require_once ROOT_DIR . 'vendor/autoload.php';
 require_once SERVICE_DIR . 'Config.php';
+require_once APP_DIR . 'utils/SQLLogger.php';
 
 /**
  * Description of BasicDAO
@@ -17,7 +18,7 @@ abstract class BasicDAO {
      * @var Doctrine\ORM\EntityManager
      */
     protected $em;
-    
+
     /**
      * @var Doctrine\ORM\EntityManager
      */
@@ -34,9 +35,9 @@ abstract class BasicDAO {
     }
 
     public final function setupDoctrine() {
-        
+
         if (BasicDAO::$entityManager === null) {
-            
+
             $paths = array(APP_DIR . "entity/");
 
             // the connection configuration
@@ -44,10 +45,15 @@ abstract class BasicDAO {
 
             $config = Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, true);
             BasicDAO::$entityManager = Doctrine\ORM\EntityManager::create($app_config['database'], $config);
-            
+
             $this->openDatabaseConnection();
+
+            if ($app_config['database']['enable_log']) {
+                BasicDAO::$entityManager->getConnection()->getConfiguration()
+                        ->setSQLLogger(new SQLLogger());
+            }
         }
-        
+
         $this->em = BasicDAO::$entityManager;
     }
 
@@ -137,7 +143,8 @@ abstract class BasicDAO {
             }
         }
     }
-    
+
     public abstract function search($filters = array(), $activeOnly = NULL, $limit = NULL, $offset = NULL);
+
     public abstract function searchCount($filters = array(), $activeOnly = NULL);
 }
