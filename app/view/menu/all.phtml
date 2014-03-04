@@ -21,6 +21,7 @@
         {{ _session.getMessage() }}
         <div class="well">
             {% for t in types %}
+            {% if t.getId() != _config['env']['portions_id'] %}
             {% if count(t.getItens()) !=  0 %}
             <a id="type{{t.getId()}}" style="display: block;height: 50px;width: 10px"></a>
             <fieldset>
@@ -36,6 +37,31 @@
                     {% endfor %}
                 </div>
             </fieldset>
+            {% endif %}
+            {% endif %}
+            {% if t.getId() == _config['env']['portions_id'] %}
+            {% if count(t.getItens()) !=  0 %}
+            <a id="type{{t.getId()}}" style="display: block;height: 50px;width: 10px"></a>
+            <fieldset>
+                <legend  >{{ t.getName() }}</legend>
+                <div class="row">
+                    <?
+                    $html = "";
+                    $itens  = $t->getItens();
+                    for ($i = 0; $i < count($itens); $i++) {
+                        if($i > 0){
+                            $html.=', ';
+                        }
+                        
+                        $html .= $itens[$i]->getName();
+                    }
+                    ?>
+                    <div style="padding: 0px 15px">
+                        <p class="text-justify help-block"><?=$html?></p>
+                    </div>
+                </div>
+            </fieldset>
+            {% endif %}
             {% endif %}
             {% endfor %}
         </div>
