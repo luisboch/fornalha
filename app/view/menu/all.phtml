@@ -27,7 +27,7 @@
             <fieldset>
                 <legend  >{{ t.getName() }}</legend>
                 <div class="row">
-                    {% for p in t.getItens() %}
+                    {% for p in ctrl.getItens(t) %}
                     {% if p.getActive() %}
                     <div class="container col-lg-4" style="height: 150px;">
                         <h4>{{p.getName()}}</h4>
@@ -47,7 +47,7 @@
                 <div class="row">
                     <?
                     $html = "";
-                    $itens  = $t->getItens();
+                    $itens  = $ctrl->getItens($t);
                     for ($i = 0; $i < count($itens); $i++) {
                         if($i > 0){
                             $html.=', ';
