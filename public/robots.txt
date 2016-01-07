@@ -1,0 +1,8 @@
+
+User-agent: Googlebot
+User-agent: Googlebot-images
+User-agent: Adsbot-Google
+User-agent: Mediapartners-Google
+User-agent: Slurp
+User-agent: Bingbot
+User-agent: * 
